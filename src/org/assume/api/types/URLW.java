@@ -23,6 +23,11 @@ public class URLW
 		return this.url_.toString().substring(this.url_.toString().lastIndexOf("."));
 	}
 
+	public String getFileName()
+	{
+		return this.url_.toString().substring(this.url_.toString().lastIndexOf("/"));
+	}
+	
 	public boolean download(String fileName)
 	{
 		/* The file name is the FULL path 

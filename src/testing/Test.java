@@ -11,15 +11,16 @@ public class Test
 {
 	public static void main(String[] args) throws IOException
 	{
-		int i = 0;
-		for(URLW d : new URLUtil("http://imgur.com").getImageUrls())
+		for(URLW d : new URLUtil("https://imgur.com").getImageUrls())
 		{
 			System.out.println(d.toString());
 			if(d.download(System.getProperty("user.home")+
 				File.separator+
-				i+".jpg"))
+				"Test"+
+				File.separator+
+				d.getFileName()))
 			{
-				i++;
+			System.out.println("Success");
 			}
 		}
 	}

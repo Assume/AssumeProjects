@@ -24,14 +24,11 @@ public class URLUtil
 	public URLUtil(String url)
 	{
 		this.url_ = url;
+		this.extension_ = "";
 	}
 
 	public URLW[] getFileUrls() throws IOException
 	{
-		if(extension_ == null)
-		{
-			return null;
-		}
 		Collection<URLW> list = new ArrayList<URLW>();
 		BufferedReader in = new BufferedReader(
 				new InputStreamReader(new URL(url_).openStream()));
