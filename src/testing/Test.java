@@ -11,17 +11,17 @@ public class Test
 {
 	public static void main(String[] args) throws IOException
 	{
-		for(URLW d : new URLUtil("https://imgur.com").getImageUrls())
+		long t = System.currentTimeMillis();
+		for(final URLW d : new URLUtil("http://imgur.com").getImageUrls())
 		{
 			System.out.println(d.toString());
-			if(d.download(System.getProperty("user.home")+
-				File.separator+
-				"Test"+
-				File.separator+
-				d.getFileName()))
-			{
-			System.out.println("Success");
-			}
+					System.out.println(d.download(System
+							.getProperty("user.home")
+							+ File.separator
+							+ "Test"
+							+ File.separator + d.getFileName()));
+	
 		}
+		System.out.println(System.currentTimeMillis() - t);
 	}
 }

@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -13,9 +14,64 @@ public class URLW
 {
 	private URL url_;
 
-	public URLW(URL url)
+	public URLW(String url) throws MalformedURLException
 	{
-		this.url_ = url;
+		this.url_ = new URL(url);
+	}
+
+	public boolean download(final String fileName)
+	{
+				/* The file name is the FULL path 
+				 *  ex. System.getProperty("user.home")+
+				 *		File.separator+
+				 *		"Users"+
+				 *		File.separator+
+				 *		"Adam"+
+				 *		File.separator+
+				 *		"documents"+
+				 *		File.separator+
+				 *		"food"+
+				 *		"food.png");
+				 */
+				OutputStream out = null;
+				URLConnection connection = null;
+				InputStream in = null;
+				try
+				{
+
+					out = new BufferedOutputStream(new FileOutputStream(
+							fileName));
+					connection = URLW.this.getUrl().openConnection();
+					in = connection.getInputStream();
+					byte[] buffer = new byte[1024];
+					int read;
+					while ((read = in.read(buffer)) != -1)
+					{
+						out.write(buffer, 0, read);
+					}
+
+				} catch (Exception e)
+				{
+					e.printStackTrace();
+				} finally
+				{
+					try
+					{
+						if (in != null)
+						{
+							in.close();
+						}
+						if (out != null)
+						{
+							out.close();
+						}
+					} catch (IOException e)
+					{
+
+					}
+				}
+
+		return new File(fileName).exists();
 	}
 
 	public String getFileExtension()
@@ -27,57 +83,15 @@ public class URLW
 	{
 		return this.url_.toString().substring(this.url_.toString().lastIndexOf("/"));
 	}
-	
-	public boolean download(String fileName)
+
+	public void setUrl(String url) throws MalformedURLException
 	{
-		/* The file name is the FULL path 
-		 *  ex. System.getProperty("user.home")+
-		 *		File.separator+
-		 *		"Users"+
-		 *		File.separator+
-		 *		"Adam"+
-		 *		File.separator+
-		 *		"documents"+
-		 *		File.separator+
-		 *		"food"+
-		 *		"food.png");
-		 */
-		OutputStream out = null;
-		URLConnection connection = null;
-		InputStream in = null;
-		try {
+		this.url_ = new URL(url);
+	}
 
-			out = new BufferedOutputStream(new FileOutputStream(fileName));
-			connection = this.getUrl().openConnection();
-			in = connection.getInputStream();
-			byte[] buffer = new byte[1024];
-			int read;
-			while ((read = in.read(buffer)) != -1) 
-			{
-				out.write(buffer, 0, read);
-			}
-
-		} catch (Exception e) 
-		{
-			e.printStackTrace();
-		} finally 
-		{
-			try 
-			{
-				if (in != null)
-				{
-					in.close();
-				}
-				if (out != null)
-				{
-					out.close();
-				}
-			} catch (IOException e) 
-			{
-
-			}
-		}
-		return new File(fileName).exists();
+	public void setUrl(URL url)
+	{
+		this.url_ = url;
 	}
 
 	@Override
