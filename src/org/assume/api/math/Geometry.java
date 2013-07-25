@@ -1,4 +1,4 @@
-package org.assume.api.math.Geometry;
+package org.assume.api.math;
 
 public class Geometry {
 	

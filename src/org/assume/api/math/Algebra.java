@@ -1,4 +1,4 @@
-package org.assume.api.math.Algebra;
+package org.assume.api.math;
 
 import java.util.HashMap;
 
