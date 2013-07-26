@@ -21,12 +21,13 @@ public class DisplayClient
 			Socket mySock = new Socket("localhost", 1604);
 			ObjectOutputStream out = new ObjectOutputStream(mySock.getOutputStream());
 			ScriptStatus k = new ScriptStatus();
-			k.setScriptName("Fighter");
-			k.setUsername("Player29");
-			k.setScriptStatus("Stopped");
-			k.addInformation("Runtime", "12 minutes");
+			k.setScriptName("CombatAIO");
+			k.setUsername("Player1");
+			k.setScriptStatus("Running");
+			k.addInformation("Runtime", "13 minutes");
 			k.addInformation("Status", "Attacking");
-			k.addInformation("Monsters Killed", "300");
+			k.addInformation("Kill Cout", "300");
+			k.addInformation("Location", "Camelot");
 			k.refreshInformation();
 			out.writeObject(k);
 			mySock.close();

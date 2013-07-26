@@ -27,7 +27,12 @@ public class ScriptStatus implements Serializable
 	public void addInformation(String key, String value)
 	{
 		map.put(key, key+": "+value);
-		this.refreshInformation();
+	}
+	
+	public void remove(String key)
+	{
+		map.remove(key);
+		setInformation(map.values().toArray(new String[map.size()]));
 	}
 	
 	public void updateInformation(String key, String value)
@@ -38,6 +43,11 @@ public class ScriptStatus implements Serializable
 			map.put(key, key+": "+value);
 		}
 		setInformation(map.values().toArray(new String[map.size()]));
+	}
+	
+	public boolean isKeyValid(String key)
+	{
+		return map.containsKey(key);
 	}
 	
 	public String getInformation(String key)

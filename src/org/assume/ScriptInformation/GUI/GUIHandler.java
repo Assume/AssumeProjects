@@ -26,19 +26,36 @@ public class GUIHandler
 			}
 		}
 	}
-	
+
+	public static void refreshScriptList(Map<String, ScriptStatus> map)
+	{
+		String[] names = map.keySet().toArray(new String[map.size()]);
+		if(names.length > 0)
+		{
+			GUI.modelScripts.clear();
+			for(String s : names)
+			{
+				ScriptStatus st = map.get(s);
+				GUI.modelScripts.addElement(map.get(s).getScriptName() +" | ["+ 
+						st.getUsername() +
+						"] | " + 
+						st.getScriptStatus());
+			}
+		}
+	}
+
 	public static void updateScriptList(Map<String, ScriptStatus> map, String username)
 	{
+		GUI.scriptList.clearSelection();
 		String[] names = map.keySet().toArray(new String[map.size()]);
 		for(String s : names)
 		{
 			ScriptStatus st = map.get(s);
 			if(!GUI.listOfUsers.contains(st.getUsername()))
 			{
-				GUI.modelScripts.addElement("Script: "+
-						map.get(s).getScriptName() +" | Username: ["+ 
+				GUI.modelScripts.addElement(map.get(s).getScriptName() +" | ["+ 
 						st.getUsername() +
-						"] |" + "Status: "+
+						"] | " + 
 						st.getScriptStatus());
 				GUI.listOfUsers.add(st.getUsername());
 			}
@@ -50,15 +67,16 @@ public class GUIHandler
 					if(GUI.modelScripts.get(GUI.modelScripts.indexOf(e)) != null)
 					{
 						GUI.modelScripts.removeElement(e);
-						GUI.modelScripts.addElement("Script: "+
-								map.get(s).getScriptName() +" | Username: ["+ 
+						GUI.modelScripts.addElement(map.get(s).getScriptName() +" | ["+ 
 								st.getUsername() +
-								"] |" + "Status: "+ st.getScriptStatus());
+								"] | " + 
+								st.getScriptStatus());
 					}
 				}
 			}
 			else{}
 		}
+		updateInfoList(GUI.modelInfo.toArray());
 	}
 
 	public static String getStringByUsername(String username)
@@ -73,7 +91,7 @@ public class GUIHandler
 		return null;
 	}
 
-	private static String getUsername(String t, String firstSplit, String secondSplit)
+	public static String getUsername(String t, String firstSplit, String secondSplit)
 	{
 
 		return t.substring(t.toString().indexOf(firstSplit), t.toString().indexOf(secondSplit)).replace(firstSplit, "");

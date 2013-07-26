@@ -64,40 +64,39 @@ public class GUI extends JFrame
 		contentPane.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Scripts");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblNewLabel.setBounds(152, 11, 96, 27);
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 17));
+		lblNewLabel.setBounds(176, 11, 96, 27);
 		contentPane.add(lblNewLabel);
 
 		JLabel lblScriptInformation = new JLabel("Script Information");
-		lblScriptInformation.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblScriptInformation.setBounds(496, 11, 170, 27);
+		lblScriptInformation.setFont(new Font("Arial", Font.BOLD, 17));
+		lblScriptInformation.setBounds(488, 37, 170, 27);
 		contentPane.add(lblScriptInformation);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(439, 50, 256, 476);
+		scrollPane_1.setBounds(439, 75, 256, 451);
 		contentPane.add(scrollPane_1);
 
 		scriptInformationList = new JList(modelInfo);
 		scrollPane_1.setViewportView(scriptInformationList);
 		scriptInformationList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(41, 49, 340, 478);
-		contentPane.add(scrollPane);
-
-		scriptList = new JList(modelScripts);
-		scrollPane.setViewportView(scriptList);
-		scriptList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scriptInformationList.setFont(new Font("Arial",Font.BOLD,11));
 		
 		JButton btnRemove = new JButton("Remove");
 		btnRemove.setBounds(292, 531, 89, 23);
 		contentPane.add(btnRemove);
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				modelScripts.removeElement(scriptList.getSelectedValuesList().toString());
+				int index  = scriptList.getSelectedIndex();
+				if(index > -1)
+				{
+					listOfUsers.remove(GUIHandler.getUsername(modelScripts.get(index),"[", "]"));
+					modelScripts.remove(index);
+
+				}
 			}
 		});
-		
+
 		JButton btnRefresh = new JButton("Refresh");
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -107,6 +106,15 @@ public class GUI extends JFrame
 		btnRefresh.setBounds(606, 531, 89, 23);
 		contentPane.add(btnRefresh);
 
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(43, 74, 338, 451);
+		contentPane.add(scrollPane);
+
+		scriptList = new JList(modelScripts);
+		scrollPane.setViewportView(scriptList);
+		scriptList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scriptList.setFont(new Font("Arial",Font.BOLD,14));
+		
 		scriptList.addListSelectionListener(new ListSelectionListener(){
 			@Override
 			public void valueChanged(ListSelectionEvent e)
@@ -114,5 +122,10 @@ public class GUI extends JFrame
 				GUIHandler.refresh();
 			}
 		});
+
+		JLabel lblNewLabel_1 = new JLabel("Script Name | Username | Script Status");
+		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 15));
+		lblNewLabel_1.setBounds(62, 37, 310, 26);
+		contentPane.add(lblNewLabel_1);
 	}
 }
