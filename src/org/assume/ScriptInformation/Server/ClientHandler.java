@@ -12,7 +12,7 @@ import scripts.*;
 class ClientHandler implements Runnable{
 
 	private Socket listener;
-
+	private final GUIHandler handler = new GUIHandler();
 	public ClientHandler(Socket listener) {
 		this.listener = listener;
 	}
@@ -30,7 +30,7 @@ class ClientHandler implements Runnable{
 					if(script != null)
 					{
 						Updater.update(script.getUsername(), script);
-						GUIHandler.updateScriptList(Updater.map, script.getUsername());
+						handler.updateScriptList(Updater.map, script.getUsername());
 					}
 				} catch (Exception ex) {
 					ex.printStackTrace();

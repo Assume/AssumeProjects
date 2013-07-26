@@ -11,7 +11,7 @@ import scripts.*;
 public class GUIHandler
 {
 
-	public static void refresh()
+	public void refresh()
 	{
 		if(GUI.modelScripts.size() > 0)
 		{
@@ -21,13 +21,13 @@ public class GUIHandler
 				String s = d.toString();
 				if(s != null)
 				{
-					GUIHandler.updateInfoList(s);
+					this.updateInfoList(s);
 				}	
 			}
 		}
 	}
 
-	public static void refreshScriptList(Map<String, ScriptStatus> map)
+	public void refreshScriptList(Map<String, ScriptStatus> map)
 	{
 		String[] names = map.keySet().toArray(new String[map.size()]);
 		if(names.length > 0)
@@ -44,7 +44,7 @@ public class GUIHandler
 		}
 	}
 
-	public static void updateScriptList(Map<String, ScriptStatus> map, String username)
+	public void updateScriptList(Map<String, ScriptStatus> map, String username)
 	{
 		GUI.scriptList.clearSelection();
 		String[] names = map.keySet().toArray(new String[map.size()]);
@@ -79,7 +79,7 @@ public class GUIHandler
 		updateInfoList(GUI.modelInfo.toArray());
 	}
 
-	public static String getStringByUsername(String username)
+	public String getStringByUsername(String username)
 	{
 		for(Object s : GUI.modelScripts.toArray())
 		{
@@ -91,13 +91,13 @@ public class GUIHandler
 		return null;
 	}
 
-	public static String getUsername(String t, String firstSplit, String secondSplit)
+	public String getUsername(String t, String firstSplit, String secondSplit)
 	{
 
 		return t.substring(t.toString().indexOf(firstSplit), t.toString().indexOf(secondSplit)).replace(firstSplit, "");
 	}
 
-	public static void updateInfoList(String listInfo)
+	public void updateInfoList(String listInfo)
 	{
 		String username = getUsername(listInfo, "[","]");
 		ScriptStatus s = Updater.map.get(username);
@@ -114,7 +114,7 @@ public class GUIHandler
 		}
 	}
 
-	public static void updateInfoList(Object[] list)
+	public void updateInfoList(Object[] list)
 	{
 		String username = null;
 		for(Object d : list)

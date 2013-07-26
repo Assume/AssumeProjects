@@ -30,6 +30,7 @@ public class GUI extends JFrame
 	static JList scriptList;
 	public static DefaultListModel<String> modelScripts = new DefaultListModel<String>();
 	static DefaultListModel<String> modelInfo = new DefaultListModel<String>();
+	private final GUIHandler handler = new GUIHandler();
 	/**
 	 * Launch the application.
 	 */
@@ -90,7 +91,7 @@ public class GUI extends JFrame
 				int index  = scriptList.getSelectedIndex();
 				if(index > -1)
 				{
-					listOfUsers.remove(GUIHandler.getUsername(modelScripts.get(index),"[", "]"));
+					listOfUsers.remove(handler.getUsername(modelScripts.get(index),"[", "]"));
 					modelScripts.remove(index);
 
 				}
@@ -100,7 +101,7 @@ public class GUI extends JFrame
 		JButton btnRefresh = new JButton("Refresh");
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				GUIHandler.updateInfoList(modelInfo.toArray());
+				handler.updateInfoList(modelInfo.toArray());
 			}
 		});
 		btnRefresh.setBounds(606, 531, 89, 23);
@@ -119,7 +120,7 @@ public class GUI extends JFrame
 			@Override
 			public void valueChanged(ListSelectionEvent e)
 			{
-				GUIHandler.refresh();
+				handler.refresh();
 			}
 		});
 
