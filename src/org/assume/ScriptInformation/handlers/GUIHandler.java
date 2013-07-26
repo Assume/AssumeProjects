@@ -50,11 +50,16 @@ public class GUIHandler
 				{
 					if(GUI.modelScripts.get(GUI.modelScripts.indexOf(e)) != null)
 					{
-						GUI.modelScripts.removeElement(e);
-						GUI.modelScripts.addElement(map.get(s).getScriptName() +" | ["+ 
+						int index = GUI.modelScripts.indexOf(e);
+						GUI.modelScripts.add(index ,(map.get(s).getScriptName() +" | ["+ 
 								st.getUsername() +
 								"] | " + 
-								st.getScriptStatus());
+								st.getScriptStatus()));
+						GUI.modelScripts.remove(index + 1);
+						/*GUI.modelScripts.addElement(map.get(s).getScriptName() +" | ["+ 
+								st.getUsername() +
+								"] | " + 
+								st.getScriptStatus());*/
 					}
 				}
 			}
