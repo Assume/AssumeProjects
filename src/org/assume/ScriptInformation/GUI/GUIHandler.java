@@ -1,5 +1,6 @@
 package org.assume.ScriptInformation.GUI;
 
+import java.awt.List;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +11,22 @@ import scripts.*;
 public class GUIHandler
 {
 
+	public static void refresh()
+	{
+		if(GUI.modelScripts.size() > 0)
+		{
+			Object d = GUI.scriptList.getSelectedValue();
+			if(d != null)
+			{
+				String s = d.toString();
+				if(s != null)
+				{
+					GUIHandler.updateInfoList(s);
+				}	
+			}
+		}
+	}
+	
 	public static void updateScriptList(Map<String, ScriptStatus> map, String username)
 	{
 		String[] names = map.keySet().toArray(new String[map.size()]);

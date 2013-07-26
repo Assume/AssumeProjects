@@ -28,7 +28,7 @@ public class GUI extends JFrame
 	static List<String> listOfUsers = new ArrayList<String>();
 	static JList scriptInformationList;
 	static JList scriptList;
-	static DefaultListModel<String> modelScripts = new DefaultListModel<String>();
+	public static DefaultListModel<String> modelScripts = new DefaultListModel<String>();
 	static DefaultListModel<String> modelInfo = new DefaultListModel<String>();
 	/**
 	 * Launch the application.
@@ -63,7 +63,6 @@ public class GUI extends JFrame
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-
 		JLabel lblNewLabel = new JLabel("Scripts");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblNewLabel.setBounds(152, 11, 96, 27);
@@ -73,9 +72,6 @@ public class GUI extends JFrame
 		lblScriptInformation.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblScriptInformation.setBounds(496, 11, 170, 27);
 		contentPane.add(lblScriptInformation);
-
-		
-		
 
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(439, 50, 256, 476);
@@ -115,11 +111,7 @@ public class GUI extends JFrame
 			@Override
 			public void valueChanged(ListSelectionEvent e)
 			{
-				String s = scriptList.getSelectedValue().toString();
-				if(s != null)
-				{
-					GUIHandler.updateInfoList(s);
-				}	
+				GUIHandler.refresh();
 			}
 		});
 	}

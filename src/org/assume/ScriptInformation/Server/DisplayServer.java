@@ -8,13 +8,11 @@ import javax.swing.JOptionPane;
 
 import org.assume.ScriptInformation.GUI.GUI;
 
-
-
 public class DisplayServer 
 {
 	public static void main(String[] args) throws IOException, ClassNotFoundException
 	{
-		int port = Integer.parseInt(JOptionPane.showInputDialog("Enter port for sever. Make sure you enter the same one on the script. Make sure the port if forwarded: "));
+		int port = Integer.parseInt(JOptionPane.showInputDialog("Enter port for sever. Make sure you enter the same one on the script. Make sure the port is forwarded: "));
 		DisplayServer serv = new DisplayServer();
 		GUI frame = new GUI();
 		frame.setVisible(true);

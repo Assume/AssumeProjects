@@ -18,15 +18,15 @@ public class DisplayClient
 	{
 		try
 		{
-			Socket mySock = new Socket("204.152.219.74", 1604);
+			Socket mySock = new Socket("localhost", 1604);
 			ObjectOutputStream out = new ObjectOutputStream(mySock.getOutputStream());
 			ScriptStatus k = new ScriptStatus();
-			k.setScriptName("CombatAIO");
-			k.setUsername("Adaaam");
-			k.setScriptStatus("Dead");
-			k.addInformation("Runtime", "8 minutes");
-			k.addInformation("Status", "Fred");
-			k.addInformation("Kill count", "500");
+			k.setScriptName("Fighter");
+			k.setUsername("Player29");
+			k.setScriptStatus("Stopped");
+			k.addInformation("Runtime", "12 minutes");
+			k.addInformation("Status", "Attacking");
+			k.addInformation("Monsters Killed", "300");
 			k.refreshInformation();
 			out.writeObject(k);
 			mySock.close();
