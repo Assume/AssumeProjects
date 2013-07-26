@@ -22,8 +22,8 @@ public class DisplayClient
 			ObjectOutputStream out = new ObjectOutputStream(mySock.getOutputStream());
 			ScriptStatus k = new ScriptStatus();
 			k.setScriptName("CombatAIO");
-			k.setUsername("Player1");
-			k.setScriptStatus("Running");
+			k.setUsername("iSucked");
+			k.setScriptStatus("Stopped");
 			k.addInformation("Runtime", "13 minutes");
 			k.addInformation("Status", "Attacking");
 			k.addInformation("Kill Cout", "300");

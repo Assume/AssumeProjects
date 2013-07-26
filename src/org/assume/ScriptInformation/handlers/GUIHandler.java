@@ -1,10 +1,11 @@
-package org.assume.ScriptInformation.GUI;
+package org.assume.ScriptInformation.handlers;
 
 import java.awt.List;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.assume.ScriptInformation.client.Updater;
+import org.assume.ScriptInformation.gui.GUI;
 
 import scripts.*;
 
@@ -23,23 +24,6 @@ public class GUIHandler
 				{
 					this.updateInfoList(s);
 				}	
-			}
-		}
-	}
-
-	public void refreshScriptList(Map<String, ScriptStatus> map)
-	{
-		String[] names = map.keySet().toArray(new String[map.size()]);
-		if(names.length > 0)
-		{
-			GUI.modelScripts.clear();
-			for(String s : names)
-			{
-				ScriptStatus st = map.get(s);
-				GUI.modelScripts.addElement(map.get(s).getScriptName() +" | ["+ 
-						st.getUsername() +
-						"] | " + 
-						st.getScriptStatus());
 			}
 		}
 	}
@@ -91,15 +75,15 @@ public class GUIHandler
 		return null;
 	}
 
-	public String getUsername(String t, String firstSplit, String secondSplit)
+	public String getUsername(String t)
 	{
 
-		return t.substring(t.toString().indexOf(firstSplit), t.toString().indexOf(secondSplit)).replace(firstSplit, "");
+		return t.substring(t.toString().indexOf("["), t.toString().indexOf("]")).replace("[", "");
 	}
 
 	public void updateInfoList(String listInfo)
 	{
-		String username = getUsername(listInfo, "[","]");
+		String username = this.getUsername(listInfo);
 		ScriptStatus s = Updater.map.get(username);
 		GUI.modelInfo.clear();
 		GUI.modelInfo.addElement("Script Name: "+s.getScriptName());

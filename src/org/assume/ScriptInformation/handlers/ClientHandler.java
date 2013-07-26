@@ -1,15 +1,14 @@
-package org.assume.ScriptInformation.Server;
+package org.assume.ScriptInformation.handlers;
 
 
 import java.io.ObjectInputStream;
 import java.net.Socket;
 
-import org.assume.ScriptInformation.GUI.GUIHandler;
 import org.assume.ScriptInformation.client.Updater;
 
 import scripts.*;
 
-class ClientHandler implements Runnable{
+public class ClientHandler implements Runnable{
 
 	private Socket listener;
 	private final GUIHandler handler = new GUIHandler();
@@ -42,6 +41,4 @@ class ClientHandler implements Runnable{
 			}
 		}
 	}
-
-
 }
