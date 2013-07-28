@@ -6,6 +6,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -22,7 +24,7 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 
 import org.assume.ScriptInformation.client.Updater;
-import org.assume.ScriptInformation.handlers.GUIHandler;
+import org.assume.ScriptInformation.gui.handlers.GUIHandler;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -65,6 +67,15 @@ public class GUI extends JFrame
 	 */
 	public GUI()
 	{
+		try
+		{
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException | UnsupportedLookAndFeelException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 882, 396);
 		contentPane = new JPanel();
@@ -146,9 +157,17 @@ class SelectedListCellRenderer extends DefaultListCellRenderer
 	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
 	{
 		Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-		if (value.toString().contains("Paused") || value.toString().contains("Stopped")) 
+		if (value.toString().contains("Stopped")) 
 		{
 			c.setBackground(Color.RED);
+		}
+		else if(value.toString().contains("Paused"))
+		{
+			c.setBackground(Color.ORANGE);
+		}
+		else if(value.toString().contains("Running"))
+		{
+			c.setBackground(Color.GREEN);
 		}
 		return c;
 	}

@@ -8,79 +8,23 @@ public class ScriptStatus implements Serializable
 {
 
 	private static final long serialVersionUID = -3569524862068627088L;
-	
+
 	private Map<String, String> map = new HashMap<String, String>();
 	private String scriptName;
 	private String scriptStatus;
 	private String[] information;
 	private String username;
+
 	public ScriptStatus()
 	{
-		
-	}
-	
-	public String getScriptName()
-	{
-		return this.scriptName;
-	}
-	
-	public void addInformation(String key, String value)
-	{
-		map.put(key, key+": "+value);
-	}
-	
-	public void remove(String key)
-	{
-		map.remove(key);
-		setInformation(map.values().toArray(new String[map.size()]));
-	}
-	
-	public void updateInformation(String key, String value)
-	{
-		if(map.containsKey(key))
-		{
-			map.remove(key);
-			map.put(key, key+": "+value);
-		}
-		setInformation(map.values().toArray(new String[map.size()]));
-	}
-	
-	public boolean isKeyValid(String key)
-	{
-		return map.containsKey(key);
-	}
-	
-	public String getInformation(String key)
-	{
-		return map.get(key);
-	}
-	
-	public void refreshInformation()
-	{
-		this.setInformation(map.values().toArray(new String[map.size()]));
-	}
-	
-	public String getUsername()
-	{
-		return this.username;
-	}
-	
-	public String getScriptStatus()
-	{
-		return this.scriptStatus;
-	}
-	
-	public String[] getInformation()
-	{
-		return this.information;
-		
+
 	}
 
 	public void setScriptStatus(String status)
 	{
 		this.scriptStatus = status;
 	}
-	
+
 	public void setScriptName(String name)
 	{
 		this.scriptName = name;
@@ -90,9 +34,67 @@ public class ScriptStatus implements Serializable
 	{
 		this.information = info;
 	}
-	
+
 	public void setUsername(String name)
 	{
 		this.username = name;
 	}
+
+	public String getInformation(String key)
+	{
+		return this.map.get(key);
+	}
+
+	public String getUsername()
+	{
+		return this.username;
+	}
+
+	public String getScriptStatus()
+	{
+		return this.scriptStatus;
+	}
+
+	public String[] getInformation()
+	{
+		return this.information;
+
+	}
+	
+	public String getScriptName()
+	{
+		return this.scriptName;
+	}
+
+	public void addInformation(String key, String value)
+	{
+		this.map.put(key, key+": "+value);
+	}
+
+	public void remove(String key)
+	{
+		this.map.remove(key);
+		setInformation(map.values().toArray(new String[map.size()]));
+	}
+
+	public void updateInformation(String key, String value)
+	{
+		if(this.map.containsKey(key))
+		{
+			this.map.remove(key);
+			this.map.put(key, key+": "+value);
+		}
+		setInformation(map.values().toArray(new String[map.size()]));
+	}
+
+	public boolean isKeyValid(String key)
+	{
+		return this.map.containsKey(key);
+	}
+
+	public void refreshInformation()
+	{
+		this.setInformation(this.map.values().toArray(new String[this.map.size()]));
+	}
+	
 }

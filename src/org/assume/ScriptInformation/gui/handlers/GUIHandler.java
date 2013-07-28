@@ -1,11 +1,14 @@
-package org.assume.ScriptInformation.handlers;
+package org.assume.ScriptInformation.gui.handlers;
 
-import java.awt.List;
-import java.util.HashMap;
+
+import java.awt.image.BufferedImage;
 import java.util.Map;
+
+import javax.swing.ImageIcon;
 
 import org.assume.ScriptInformation.client.Updater;
 import org.assume.ScriptInformation.gui.GUI;
+
 
 import scripts.*;
 
@@ -55,7 +58,7 @@ public class GUIHandler
 								st.getUsername() +
 								"] | " + 
 								st.getScriptStatus()));
-						GUI.modelScripts.remove(index + 1);
+						GUI.modelScripts.remove(index +1);
 						/*GUI.modelScripts.addElement(map.get(s).getScriptName() +" | ["+ 
 								st.getUsername() +
 								"] | " + 

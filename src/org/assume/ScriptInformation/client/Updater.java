@@ -10,7 +10,7 @@ public class Updater
 	
 	public static Map<String, ScriptStatus> map = new HashMap<String, ScriptStatus>();
 	
-	public static void update(String userName, ScriptStatus status)
+	public void update(String userName, ScriptStatus status)
 	{
 		if(userName != null)
 		{
