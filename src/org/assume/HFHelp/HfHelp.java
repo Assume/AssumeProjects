@@ -1,46 +1,73 @@
 package org.assume.HFHelp;
-import java.util.Scanner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HfHelp
 {
 	public static void main(String[] args)
 	{
-		String[] blah = {"Question one here", "Question two here", "Question 3 here", "Etc etc ectc"};
-		String[] answerOne = {"Answer one for question 1 here", "Answer one for question two here", "etc etc etc"};
-		String[] answerTwo = {"Answer two for question 1 here", "Answer two for question two here", "etc etc etc"};
-		String[] answerThree = {"Answer three for question 1 here", "Answer three for question two here", "etc etc etc"};
-		String[] answerFour = {"Answer four for question 1 here", "Answer four for question two here", "etc etc etc"};
+		HfHelp help = new HfHelp();
+		int[] t = new int[10];
+		t[0] = 1;
+		t[1] = 2;
+		t[3] = 3;
+		t[7] = 1;
+		System.out.println(t[9]);
+		System.out.println(help.readData(t));
+	}
 
-		int a = 0;
-		int b = 0;
-		int c = 0;
-		int d = 0;
-		int i  = 0;
-		for(String t : blah)
+	private int readData(int[] x)
+	{
+		int t = 0;
+		for(int i = 0; i < x.length; i++)
 		{
-			System.out.println(t);
-			System.out.format("A. "+answerOne[i]+"%nB. "+answerTwo[i] +"%nC. "+answerThree[i]+"%nD. "+answerFour[i]+"%n");
-			switch(new Scanner(System.in).nextLine().toUpperCase())
+			if(x[i] == -999)
 			{
-			case "A":
-				a++;
-				break;
-			case "B":
-				b++;
-				break;
-			case "C":
-				c++;
-				break;
-			case "D":
-				d++;
-				break;
+				return t;
 			}
-			if(i < blah.length)
-				i++;
+			else if(x[i] == 0)
+			{
+				continue;
+			}
+			else
+			{
+				t++;
+			}
 		}
-		System.out.format("You chose manipulative: "+a+" times" +
-				"%nYou chose nonmanipulative: "+b+" times" +
-				"%nYou chose neutral: "+c+" times" +
-				"%nYou chose random: "+d+" times");
+		return t;
+	}
+
+
+	private boolean containsDuplicates(int[] x)
+	{
+		List<Integer> list = new ArrayList<Integer>();
+		for(int i : x)
+		{
+			if(list.contains(i))
+			{
+				return true;
+			}
+			else
+			{
+				list.add(i);
+			}
+		}
+		return false;
+	}
+
+	private void printArray(int...array)
+	{
+		for(int i = 1; i <= array.length; i++)
+		{
+			if (i % 10 == 0)
+			{
+				System.out.println(array[i - 1] +" ");
+			} 
+			else 
+			{
+				System.out.print(array[i - 1] +" ");
+			}
+		}		
 	}
 }

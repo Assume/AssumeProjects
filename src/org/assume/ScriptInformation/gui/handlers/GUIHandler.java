@@ -1,16 +1,11 @@
 package org.assume.ScriptInformation.gui.handlers;
 
-
-import java.awt.image.BufferedImage;
 import java.util.Map;
 
-import javax.swing.ImageIcon;
-
-import org.assume.ScriptInformation.client.Updater;
+import org.assume.ScriptInformation.client.Database;
 import org.assume.ScriptInformation.gui.GUI;
 
-
-import scripts.*;
+import scripts.ScriptStatus;
 
 public class GUIHandler
 {
@@ -59,10 +54,6 @@ public class GUIHandler
 								"] | " + 
 								st.getScriptStatus()));
 						GUI.modelScripts.remove(index +1);
-						/*GUI.modelScripts.addElement(map.get(s).getScriptName() +" | ["+ 
-								st.getUsername() +
-								"] | " + 
-								st.getScriptStatus());*/
 					}
 				}
 			}
@@ -92,7 +83,7 @@ public class GUIHandler
 	public void updateInfoList(String listInfo)
 	{
 		String username = this.getUsername(listInfo);
-		ScriptStatus s = Updater.map.get(username);
+		ScriptStatus s = Database.map.get(username);
 		GUI.modelInfo.clear();
 		GUI.modelInfo.addElement("Script Name: "+s.getScriptName());
 		GUI.modelInfo.addElement("Username: "+s.getUsername());
@@ -118,7 +109,7 @@ public class GUIHandler
 		}
 		if(username != null)
 		{
-			ScriptStatus s = Updater.map.get(username);
+			ScriptStatus s = Database.map.get(username);
 			GUI.modelInfo.clear();
 			GUI.modelInfo.addElement("Script Name: "+s.getScriptName());
 			GUI.modelInfo.addElement("Username: "+s.getUsername());

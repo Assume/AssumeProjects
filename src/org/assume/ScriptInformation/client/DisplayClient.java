@@ -4,7 +4,8 @@ import java.io.*;
 import java.net.*;
 import java.util.Random;
 
-import scripts.*;
+import scripts.ScriptStatus;
+
 
 public class DisplayClient
 {
@@ -19,7 +20,7 @@ public class DisplayClient
 	{
 		try
 		{
-			for(int i = 0; i< 25; i++)
+			for(int i = 0; i < 25; i++)
 			{
 				Socket mySock = new Socket("localhost", 1604);
 				ObjectOutputStream out = new ObjectOutputStream(mySock.getOutputStream());
@@ -33,7 +34,6 @@ public class DisplayClient
 				k.addInformation("Status", "Sleep");
 				k.addInformation("TestData", "300");
 				k.addInformation("TestData1", "Fun");
-				k.refreshInformation();
 				out.writeObject(k);
 				mySock.close();
 				out.flush();

@@ -69,12 +69,15 @@ public class ScriptStatus implements Serializable
 	public void addInformation(String key, String value)
 	{
 		this.map.put(key, key+": "+value);
+		this.refreshInformation();
+		
 	}
 
 	public void remove(String key)
 	{
 		this.map.remove(key);
-		setInformation(map.values().toArray(new String[map.size()]));
+		this.refreshInformation();
+		
 	}
 
 	public void updateInformation(String key, String value)
@@ -84,7 +87,7 @@ public class ScriptStatus implements Serializable
 			this.map.remove(key);
 			this.map.put(key, key+": "+value);
 		}
-		setInformation(map.values().toArray(new String[map.size()]));
+		this.refreshInformation();
 	}
 
 	public boolean isKeyValid(String key)
@@ -92,7 +95,7 @@ public class ScriptStatus implements Serializable
 		return this.map.containsKey(key);
 	}
 
-	public void refreshInformation()
+	private void refreshInformation()
 	{
 		this.setInformation(this.map.values().toArray(new String[this.map.size()]));
 	}

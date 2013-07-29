@@ -4,16 +4,17 @@ package org.assume.ScriptInformation.server.handlers;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 
-import org.assume.ScriptInformation.client.Updater;
+import org.assume.ScriptInformation.client.Database;
 import org.assume.ScriptInformation.gui.handlers.GUIHandler;
 
-import scripts.*;
+import scripts.ScriptStatus;
+
 
 public class ClientHandler implements Runnable{
 
 	private Socket listener;
 	private final GUIHandler handler = new GUIHandler();
-	private final Updater updater = new Updater();
+	private final Database Database = new Database();
 	public ClientHandler(Socket listener) {
 		this.listener = listener;
 	}
@@ -30,8 +31,8 @@ public class ClientHandler implements Runnable{
 							.readObject();
 					if(script != null)
 					{
-						updater.update(script.getUsername(), script);
-						handler.updateScriptList(Updater.map, script.getUsername());
+						Database.update(script.getUsername(), script);
+						handler.updateScriptList(Database.map, script.getUsername());
 					}
 				} catch (Exception ex) {
 					ex.printStackTrace();

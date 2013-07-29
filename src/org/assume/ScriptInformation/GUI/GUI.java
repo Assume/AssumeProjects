@@ -23,7 +23,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 
-import org.assume.ScriptInformation.client.Updater;
+import org.assume.ScriptInformation.client.Database;
 import org.assume.ScriptInformation.gui.handlers.GUIHandler;
 
 import java.awt.event.ActionListener;
@@ -102,7 +102,7 @@ public class GUI extends JFrame
 				if(index > -1)
 				{
 					listOfUsers.remove(handler.getUsername(modelScripts.get(index)));
-					Updater.map.remove(handler.getUsername(modelScripts.get(index)));
+					Database.map.remove(handler.getUsername(modelScripts.get(index)));
 					modelScripts.remove(index);
 				}
 			}

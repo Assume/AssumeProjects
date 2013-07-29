@@ -3,13 +3,14 @@ package org.assume.ScriptInformation.client;
 import java.util.HashMap;
 import java.util.Map;
 
-import scripts.*;
+import scripts.ScriptStatus;
 
-public class Updater
+
+public class Database
 {
-	
+
 	public static Map<String, ScriptStatus> map = new HashMap<String, ScriptStatus>();
-	
+
 	public void update(String userName, ScriptStatus status)
 	{
 		if(userName != null)
