@@ -1,28 +1,9 @@
 package org.assume.ScriptInstaller;
 
-import java.awt.HeadlessException;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.net.URLConnection;
-
-
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-import net.lingala.zip4j.core.ZipFile;
-import net.lingala.zip4j.exception.ZipException;
 
 public class ScriptInstaller
 {
-
+/*
 	public static void main(String[] args) throws ZipException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException, HeadlessException, IOException
 	{
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -132,6 +113,6 @@ public class ScriptInstaller
 
 			}
 		}
-	}
+	}*/
 
 }

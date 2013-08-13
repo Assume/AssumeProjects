@@ -1,7 +1,5 @@
 package org.assume.HFHelp;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class HfHelp
 {
@@ -36,38 +34,5 @@ public class HfHelp
 			}
 		}
 		return t;
-	}
-
-
-	private boolean containsDuplicates(int[] x)
-	{
-		List<Integer> list = new ArrayList<Integer>();
-		for(int i : x)
-		{
-			if(list.contains(i))
-			{
-				return true;
-			}
-			else
-			{
-				list.add(i);
-			}
-		}
-		return false;
-	}
-
-	private void printArray(int...array)
-	{
-		for(int i = 1; i <= array.length; i++)
-		{
-			if (i % 10 == 0)
-			{
-				System.out.println(array[i - 1] +" ");
-			} 
-			else 
-			{
-				System.out.print(array[i - 1] +" ");
-			}
-		}		
 	}
 }

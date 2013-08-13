@@ -1,11 +1,11 @@
-package org.assume.ScriptInformation.server.handlers;
+package org.assume.ScriptInformation.Server.handlers;
 
 
 import java.io.ObjectInputStream;
 import java.net.Socket;
 
 import org.assume.ScriptInformation.client.Database;
-import org.assume.ScriptInformation.gui.handlers.GUIHandler;
+import org.assume.ScriptInformation.GUI.handlers.GUIHandler;
 
 import scripts.ScriptStatus;
 

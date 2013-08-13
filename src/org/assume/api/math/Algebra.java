@@ -1,6 +1,5 @@
 package org.assume.api.math;
 
-import java.util.HashMap;
 
 public class Algebra {
 	public static double getAverage(double[] doubleArray)
@@ -109,7 +108,6 @@ public class Algebra {
 
 	public static double getAverageRange(double[] doubleArray, int start, int finish)
 	{
-		double average = 0;
 		if(finish > doubleArray.length)
 		{
 			finish = doubleArray.length;
@@ -123,7 +121,7 @@ public class Algebra {
 		{
 			total = total+ doubleArray[i];
 		}
-		return average = total / (finish - start);
+		return total / (finish - start);
 	}
 
 

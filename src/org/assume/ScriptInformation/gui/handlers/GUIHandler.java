@@ -1,9 +1,9 @@
-package org.assume.ScriptInformation.gui.handlers;
+package org.assume.ScriptInformation.GUI.handlers;
 
 import java.util.Map;
 
 import org.assume.ScriptInformation.client.Database;
-import org.assume.ScriptInformation.gui.GUI;
+import org.assume.ScriptInformation.GUI.GUI;
 
 import scripts.ScriptStatus;
 

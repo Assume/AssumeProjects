@@ -1,25 +1,12 @@
 package org.assume.LoaderInstaller;
 
-import java.io.BufferedOutputStream;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.net.URLConnection;
-
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
-import net.lingala.zip4j.core.ZipFile;
-import net.lingala.zip4j.exception.ZipException;
+//import net.lingala.zip4j.core.ZipFile;
+//import net.lingala.zip4j.exception.ZipException;
 
 public class LoaderInstaller
 {
-
+/*
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, ZipException, IOException
 	{
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -140,5 +127,5 @@ public class LoaderInstaller
 
 			}
 		}
-	}
+	}*/
 }

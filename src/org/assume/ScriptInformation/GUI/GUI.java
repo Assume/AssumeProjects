@@ -1,37 +1,34 @@
-package org.assume.ScriptInformation.gui;
+package org.assume.ScriptInformation.GUI;
 
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.JList;
-import javax.swing.JLabel;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-
+import org.assume.ScriptInformation.GUI.handlers.GUIHandler;
 import org.assume.ScriptInformation.client.Database;
-import org.assume.ScriptInformation.gui.handlers.GUIHandler;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
+@SuppressWarnings("rawtypes")
 public class GUI extends JFrame
 {
-
 
 	private static final long serialVersionUID = -6662234732912027441L;
 	private JPanel contentPane;
@@ -65,6 +62,7 @@ public class GUI extends JFrame
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings("unchecked")
 	public GUI()
 	{
 		try
@@ -151,10 +149,11 @@ public class GUI extends JFrame
 }
 
 
+@SuppressWarnings("serial")
 class SelectedListCellRenderer extends DefaultListCellRenderer 
 {
 	@Override
-	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
+	public Component getListCellRendererComponent(@SuppressWarnings("rawtypes") JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
 	{
 		Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 		if (value.toString().contains("Stopped")) 

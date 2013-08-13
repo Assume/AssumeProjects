@@ -1,4 +1,4 @@
-package org.assume.ScriptInformation.server;
+package org.assume.ScriptInformation.Server;
 
 import java.io.IOException;
 
@@ -7,8 +7,8 @@ import java.net.Socket;
 
 import javax.swing.JOptionPane;
 
-import org.assume.ScriptInformation.gui.GUI;
-import org.assume.ScriptInformation.server.handlers.ClientHandler;
+import org.assume.ScriptInformation.GUI.GUI;
+import org.assume.ScriptInformation.Server.handlers.ClientHandler;
 
 
 public class DisplayServer 
