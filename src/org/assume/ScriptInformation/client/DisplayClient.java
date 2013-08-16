@@ -20,10 +20,15 @@ public class DisplayClient
 	{
 		try
 		{
-			for(int i = 0; i < 25; i++)
-			{
-				Socket mySock = new Socket("localhost", 1604);
-				ObjectOutputStream out = new ObjectOutputStream(mySock.getOutputStream());
+				while(true)
+				{
+					Socket mySock = new Socket("localhost", 1604);
+					System.out.println(new BufferedReader(new InputStreamReader(mySock.getInputStream())).readLine());
+					mySock.close();
+				}
+				
+				
+				/*ObjectOutputStream out = new ObjectOutputStream(mySock.getOutputStream());
 				ScriptStatus k = new ScriptStatus();
 				String[] g = {"Running", "Paused/Random","Stopped"};
 				k = new ScriptStatus();
@@ -35,10 +40,11 @@ public class DisplayClient
 				k.addInformation("TestData", "300");
 				k.addInformation("TestData1", "Fun");
 				out.writeObject(k);
-				mySock.close();
+				
+				
 				out.flush();
-				out.close();
-			}
+				out.close();*/
+				
 		} catch (Exception e)
 		{
 			// TODO Auto-generated catch block
