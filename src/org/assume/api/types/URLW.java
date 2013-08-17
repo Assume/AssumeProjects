@@ -41,7 +41,7 @@ public class URLW
 
 					out = new BufferedOutputStream(new FileOutputStream(
 							fileName));
-					connection = URLW.this.getUrl().openConnection();
+					connection = this.getUrl().openConnection();
 					in = connection.getInputStream();
 					byte[] buffer = new byte[1024];
 					int read;
