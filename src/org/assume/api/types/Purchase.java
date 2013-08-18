@@ -27,7 +27,7 @@ public class Purchase
 	{
 		final NumberFormat currencyInstance = NumberFormat.getCurrencyInstance();
 		currencyInstance.setCurrency(Currency.getInstance("USD"));
-		return currencyInstance.format(price);
+		return currencyInstance.format(this.price);
 	}
 
 	public String getItem()
@@ -45,8 +45,15 @@ public class Purchase
 		return c;
 	}
 	
+	@Override
 	public String toString()
 	{
-		return "Purchased: "+item +" on "+date.toString()+" for "+getPriceFormatted() +" in the category "+c.toString();
+		return "Purchased: "+item +
+				" on " + 
+				date.toString()+
+				" for "+
+				getPriceFormatted() +
+				" in the category "+
+				c.toString();
 	}
 }

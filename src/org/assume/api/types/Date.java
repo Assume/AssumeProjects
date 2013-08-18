@@ -29,6 +29,7 @@ public class Date
 		return day;
 	}
 	
+	@Override
 	public String toString()
 	{
 		return month+"/"+day+"/"+year;

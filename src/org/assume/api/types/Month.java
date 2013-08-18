@@ -20,7 +20,7 @@ public enum Month
 	private String name;
 	private Month(int monthNumber, int day)
 	{
-		name = toTitle(super.toString());
+		name = toTitle();
 		this.monthNumber = monthNumber;
 		this.day = day;
 	}
@@ -41,10 +41,10 @@ public enum Month
 		return name;
 	}
 	
-	private String toTitle(final String string)
+	private String toTitle()
 	{
 		final StringBuilder sb = new StringBuilder();
-		for (final String s : string.split("_")) {
+		for (final String s : this.name().split("_")) {
 			sb.append(Character.toUpperCase(s.charAt(0)));
 			sb.append(s.substring(1, s.length()).toLowerCase());
 			sb.append(" ");

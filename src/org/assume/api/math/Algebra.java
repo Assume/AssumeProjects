@@ -4,7 +4,6 @@ package org.assume.api.math;
 public class Algebra {
 	public static double getAverage(double[] doubleArray)
 	{
-
 		double total = 0;
 		for(int i = 0; i< doubleArray.length; i++)
 		{
@@ -74,8 +73,8 @@ public class Algebra {
 
 	public static double getMedian(double[] doubleArray)
 	{
-		int middle = doubleArray.length/2;
-		if (doubleArray.length%2 == 1) 
+		int middle = doubleArray.length / 2;
+		if (doubleArray.length % 2 == 1) 
 		{
 			return doubleArray[middle];
 		}
@@ -119,7 +118,7 @@ public class Algebra {
 		double total = 0;
 		for(int i = start; i< finish; i++)
 		{
-			total = total+ doubleArray[i];
+			total += doubleArray[i];
 		}
 		return total / (finish - start);
 	}

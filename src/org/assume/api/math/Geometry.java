@@ -9,12 +9,12 @@ public class Geometry {
    
 	public static double getCircleCircumfrence(double radius)
     {
-        return (radius *2) * Math.PI;
+        return (radius * 2) * Math.PI;
     }
     
     public static double getAreaTrapezoid(double baseOne, double baseTwo , double height)
     {
-        return ((baseOne + baseTwo) / 2)*height;
+        return ((baseOne + baseTwo) / 2) * height;
     }
    
     public static double getTriangleArea(double base, double height){
@@ -38,7 +38,7 @@ public class Geometry {
     
     public static double getCubeArea(double side)
     {
-        return (side*side) * 6;
+        return (side * side) * 6;
     }
   
     public static double getSphereArea(double radius)
@@ -63,12 +63,12 @@ public class Geometry {
   
     public static double getSphereVolume(double radius)
     {
-        return (4/3)*Math.PI * Math.pow(radius,3);
+        return (4/3) * Math.PI * Math.pow(radius,3);
     }
    
     public static double getCylinderVolume(double radius, double height)
     {
-        return Math.PI* Math.pow(radius, 2) * height;
+        return Math.PI * Math.pow(radius, 2) * height;
     }
     
     public static double getConeVolume(double radius, double height)
@@ -78,11 +78,15 @@ public class Geometry {
     
     public static double getPyramidVolume(double baseArea, double height)
     {
-        return (1/3) *baseArea * height;
+        return (1/3) * baseArea * height;
     }
    
     public static double[] getMidpoint(double x1, double y1, double x2, double y2){ 
-        return new double[] { ((x1 + x2)/2), ((y1+y2)/2) }; 
+        return new double[] 
+        		{ 
+        		((x1 + x2)/2), 
+        		((y1+y2)/2) 
+        		}; 
     }
     
     public static double getDistanceBetweenTwoPoints(double x1, double x2, double y1, double y2){

@@ -39,18 +39,18 @@ public class HelloSorted extends HelloSimple
 
 		if (reverseOrder()) {
 			ReverseStringComp reverse = new ReverseStringComp();
-			Arrays.sort( words, reverse );						// sort the words IN REVERSE ALPHABETICAL ORDER
+			Arrays.sort( words, reverse );					
 		}
 		else {
 			ForwardStringComp forward = new ForwardStringComp();
-			Arrays.sort( words, forward );						// sort the words alphabetically
+			Arrays.sort( words, forward );					
 		}
 
-		StringBuilder  sb = new StringBuilder();		// build an output string for the message
-		for (String aWord : words) {								// go through all of the (now sorted) words
-			sb.append( aWord + " " );									// add each word (and a space) to the output message
+		StringBuilder  sb = new StringBuilder();		
+		for (String aWord : words) {								
+			sb.append( aWord + " " );								
 		}
 
-		return  sb.toString();  										// return the alphabetically sorted message
+		return  sb.toString();  										
 	}
 }
