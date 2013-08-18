@@ -21,48 +21,56 @@ public class Download {
 	 *		File.separator+
 	 *		"documents"+
 	 *		File.separator+
-	 *		"food"+
 	 *		"food.png");
 	 */
-	public static boolean download(final String filePath, final String url)
+	public static File download(final String filePath, final String url)
 	{
-		OutputStream out = null;
-		URLConnection connection = null;
-		InputStream in = null;
-		try
+		new Thread()
 		{
-			out = new BufferedOutputStream(new FileOutputStream(
-					filePath));
-			connection = new URL(url).openConnection();
-			in = connection.getInputStream();
-			byte[] buffer = new byte[1024];
-			int read;
-			while ((read = in.read(buffer)) != -1)
+			@Override
+			public void run()
 			{
-				out.write(buffer, 0, read);
-			}
-
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		} finally
-		{
-			try
-			{
-				if (in != null)
+				OutputStream out = null;
+				URLConnection connection = null;
+				InputStream in = null;
+				try
 				{
-					in.close();
-				}
-				if (out != null)
+					out = new BufferedOutputStream(new FileOutputStream(filePath));  
+					connection = new URL(url).openConnection();
+					connection.setRequestProperty("User-Agent",
+			                "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11"); 
+					in = connection.getInputStream();
+					byte[] buffer = new byte[1024];
+					int read;
+					while ((read = in.read(buffer)) != -1)
+					{
+						out.write(buffer, 0, read);
+					}
+
+				} catch (Exception e)
 				{
-					out.close();
+					e.printStackTrace();
+				} finally
+				{
+					try
+					{
+						if (in != null)
+						{
+							in.close();
+						}
+						if (out != null)
+						{
+							out.close();
+						}
+					} catch (IOException e)
+					{
+
+					}
 				}
-			} catch (IOException e)
-			{
-
 			}
-		}
-
-		return new File(filePath).exists();
+		}.start();
+		return new File(filePath);	
 	}
 }
+
+
