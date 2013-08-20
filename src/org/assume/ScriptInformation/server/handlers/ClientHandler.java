@@ -14,7 +14,7 @@ public class ClientHandler implements Runnable{
 
 	private Socket listener;
 	private final GUIHandler handler = new GUIHandler();
-	private final Database Database = new Database();
+	private final Database database = new Database();
 	public ClientHandler(Socket listener) {
 		this.listener = listener;
 	}
