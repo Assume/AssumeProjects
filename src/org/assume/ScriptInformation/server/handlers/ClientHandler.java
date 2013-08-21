@@ -31,7 +31,7 @@ public class ClientHandler implements Runnable{
 							.readObject();
 					if(script != null)
 					{
-						Database.update(script.getUsername(), script);
+						database.update(script.getUsername(), script);
 						handler.updateScriptList(Database.map, script.getUsername());
 					}
 				} catch (Exception ex) {
