@@ -29,7 +29,7 @@ public class TestClass
 			else if(m.group().contains("m"))
 			{
 				StringBuilder b = new StringBuilder();
-				b.append(m.group().replace(oldChar, newChar));
+				//b.append(m.group().replace(oldChar, newChar));
 				while(t.find())
 				{
 					b.append(t.group().replace("," , ""));
