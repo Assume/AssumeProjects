@@ -130,7 +130,6 @@ public class ShapeDrawer
 						draw(max, spacing, x + 2, drawing, atMax);
 					}
 				}
-
 			}
 		};
 
@@ -139,7 +138,7 @@ public class ShapeDrawer
 
 	public static void main(String[] args)
 	{
-		new ShapeDrawer(Shape.DIAMOND, '_', '*', 50).draw();
+		new ShapeDrawer(Shape.DIAMOND, ' ', '*', 7).draw();
 	}
 
 }
