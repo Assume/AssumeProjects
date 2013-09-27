@@ -5,7 +5,7 @@ public class Diamond
 	public static void main(String[] args)
 	{
 		Diamond a = new Diamond();
-		a.draw(40, '_', 1, '+', false);
+		a.draw(25, '_', 1, '@', false);
 	}
 
 	public void draw(int max, char spacing, int x, char drawing, boolean atMax)
@@ -21,7 +21,7 @@ public class Diamond
 		}
 		else
 		{
-			for (int r = 0; r < (Math.ceil((max - x) / 2)); r++)
+			for (int r = 0; r < ((max - x) / 2); r++)
 			{
 				System.out.print(spacing);
 			}
@@ -29,7 +29,7 @@ public class Diamond
 			{
 				System.out.print(drawing);
 			}
-			for (int r = 0; r < (Math.ceil((max - x) / 2)); r++)
+			for (int r = 0; r < ((max - x) / 2); r++)
 			{
 				System.out.print(spacing);
 			}
