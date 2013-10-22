@@ -48,6 +48,20 @@ public class Word
 	this.word = word;
     }
 
+    public static String generateRandomString(int length)
+    {
+	char[] az = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+	Random rand = new Random();
+
+	String temp = "";
+	for (int j = 1; j <= rand.nextInt(length) + 1; j++)
+	{
+	    temp = temp.concat(Character.toString(az[rand.nextInt(26)]));
+	}
+
+	return temp;
+    }
+
     public static Word[] generateRandom(int amount)
     {
 	char[] az = "abcdefghijklmnopqrstuvwxyz".toCharArray();
@@ -56,7 +70,7 @@ public class Word
 	for (int i = 0; i < amount; i++)
 	{
 	    String temp = "";
-	    for(int j = 1; j <= rand.nextInt(12) + 1; j++)
+	    for (int j = 1; j <= rand.nextInt(12) + 1; j++)
 	    {
 		temp = temp.concat(Character.toString(az[rand.nextInt(26)]));
 	    }
