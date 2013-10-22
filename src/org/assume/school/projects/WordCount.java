@@ -86,8 +86,6 @@ public class WordCount
 		    largest = ints[i];
 	    }
 	}
-	if(largest == Integer.MIN_VALUE)
-	    largest = ints.length;
 	return largest;
     }
 
@@ -102,9 +100,10 @@ public class WordCount
 	    if (i == ints.length)
 	    {
 		i = 0;
+		System.out.println();
 		continue;
 	    }
-
+		
 	    if (skip.size() == ints.length)
 	    {
 		return;
@@ -114,11 +113,10 @@ public class WordCount
 	    {
 		i = 0;
 		System.out.println();
-		continue;
 	    }
 	    if (skip.contains(i))
 	    {
-		for (int u = 0; u < (i + 12) + ((i / 2) - 2); u++)
+		for (int u = 0; u < (i + 12); u++)
 		{
 		    System.out.print(" ");
 		}
