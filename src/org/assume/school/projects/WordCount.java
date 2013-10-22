@@ -50,7 +50,7 @@ public class WordCount
 	else
 	    WordCount.printHorizontal(WordCount.shellSort(WordCount
 		    .count(words)));
-	// System.out.println((System.currentTimeMillis() - start));
+	System.out.println((System.currentTimeMillis() - start));
     }
 
     public static Word[] getInput(File f) throws IOException
