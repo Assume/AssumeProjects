@@ -2,15 +2,17 @@ package org.assume.school.projects;
 
 import java.io.BufferedReader;
 import java.io.File;
-import javax.swing.filechooser.FileFilter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 
 public class WordCount
 {
@@ -37,7 +39,18 @@ public class WordCount
 	    }
 	});
 	ch.showOpenDialog(null);
-	sortAndPrint(getInput(ch.getSelectedFile()));
+	sortAndPrint(getInput(ch.getSelectedFile()), true);
+    }
+
+    public static void sortAndPrint(Word[] words, boolean horizontal)
+    {
+	long start = System.currentTimeMillis();
+	if (!horizontal)
+	    WordCount.print(WordCount.shellSort(WordCount.count(words)));
+	else
+	    WordCount.printHorizontal(WordCount.shellSort(WordCount
+		    .count(words)));
+	// System.out.println((System.currentTimeMillis() - start));
     }
 
     public static Word[] getInput(File f) throws IOException
@@ -50,9 +63,9 @@ public class WordCount
 	    for (String s : str.split(" "))
 	    {
 		s = s.replaceAll("[^a-zA-Z0-9&&[^-]]", "");
-		if(s.length() == 0)
+		if (s.length() == 0)
 		    continue;
-		if(s.matches("[0-9]+"))
+		if (s.matches("[0-9]+"))
 		    continue;
 		list.add(new Word(s));
 	    }
@@ -62,9 +75,70 @@ public class WordCount
 	return list.toArray(new Word[list.size()]);
     }
 
-    public static void sortAndPrint(Word[] words)
+    public static int getMax(List<Integer> list, Integer[] ints)
     {
-	WordCount.print(WordCount.sort(WordCount.count(words)));
+	Integer[] array = list.toArray(new Integer[list.size()]);
+	int largest = Integer.MIN_VALUE;
+	for (int i = 0; i < array.length; i++)
+	{
+	    if (array[i] > largest)
+	    {
+		if (!list.contains(i))
+		    largest = array[i];
+	    }
+	}
+
+	return largest;
+    }
+
+    public static void printHorizontal(Map<Integer, List<Word>> map)
+    {
+	Integer[] ints = WordCount.smallestToLargest(map.keySet().toArray(
+		new Integer[map.size()]));
+	List<Integer> skip = new ArrayList<Integer>();
+
+	for (int i = 0; i < ints.length; i++)
+	{
+	    if (skip.size() == ints.length)
+		return;
+	    for (int t = 0; t < 1; t++)
+	    {
+		if (skip.size() == ints.length)
+		    return;
+		if (i == getMax(skip, ints) || i == ints.length - 1)
+		{
+		    i = 0;
+		    System.out.println();
+		}
+		if (skip.contains(i))
+		{
+		    for (int u = 0; u < i + 2; u++)
+		    {
+			System.out.print(" ");
+		    }
+		    i = i == getMax(skip, ints) ? i + 1 : 0;
+		    continue;
+		}
+
+		if (map.get(ints[i]).size() > 0)
+		{
+		    System.out.print("| " + map.get(ints[i]).get(0).getWord()
+			    + "(" + map.get(ints[i]).get(0).getLength() + ") "
+			    + map.get(ints[i]).get(0).getAmount() + " | ");
+
+		    map.get(ints[i]).remove(0);
+		    t--;
+		    if (i < ints.length)
+			i++;
+		    continue;
+		} else
+		{
+		    skip.add(i);
+		}
+		t = 1;
+	    }
+
+	}
     }
 
     public static void print(Map<Integer, List<Word>> map)
@@ -114,7 +188,7 @@ public class WordCount
 		    list.get(list.indexOf(words[i])).incrementAmount();
 		} else
 		{
-		    if(words[i].getLength() == 0)
+		    if (words[i].getLength() == 0)
 			continue;
 		    words[i].incrementAmount();
 		    list.add(words[i]);
@@ -130,6 +204,51 @@ public class WordCount
 	return map;
     }
 
+    public static Map<Integer, List<Word>> shellSort(
+	    Map<Integer, List<Word>> map)
+    {
+	Integer[] ints = map.keySet().toArray(new Integer[map.size()]);
+
+	for (int i = 0; i < ints.length; i++)
+	{
+	    List<Word> list = map.get(ints[i]);
+	    map.remove(ints[i]);
+	    Word[] words = list.toArray(new Word[list.size()]);
+	    for (int j = 0; j < words.length - 1; j++)
+	    {
+		int length = words.length;
+		int in, out;
+		Word temp;
+		int h = 1;
+		while (h <= length / 3)
+		{
+		    h = h * 3 + 1;
+		}
+		while (h > 0)
+		{
+		    for (out = h; out < length; out++)
+		    {
+			temp = words[out];
+			in = out;
+
+			while (in > h - 1
+				&& words[in - h].getAmount() <= temp
+					.getAmount())
+			{
+			    words[in] = words[in - h];
+			    in -= h;
+			}
+			words[in] = temp;
+		    }
+		    h = (h - 1) / 3;
+		}
+	    }
+	    map.put(ints[i], new LinkedList<Word>(Arrays.asList(words)));
+
+	}
+	return map;
+    }
+
     public static Map<Integer, List<Word>> sort(Map<Integer, List<Word>> map)
     {
 	Word toreplace;
@@ -137,15 +256,20 @@ public class WordCount
 	for (int i = 0; i < ints.length; i++)
 	{
 	    List<Word> list = map.get(ints[i]);
+	    map.remove(ints[i]);
 	    Word[] words = list.toArray(new Word[list.size()]);
 	    for (int j = 0; j < words.length - 1; j++)
-		if (words[j].getLength() < words[j + 1].getLength())
+	    {
+		if (words[j].getAmount() < words[j + 1].getAmount())
 		{
 		    toreplace = words[j];
 		    words[j] = words[j + 1];
 		    words[j + 1] = toreplace;
 		    j = -1;
 		}
+	    }
+	    map.put(ints[i], new LinkedList<Word>(Arrays.asList(words)));
+
 	}
 	return map;
     }
