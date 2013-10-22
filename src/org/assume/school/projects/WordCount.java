@@ -77,17 +77,17 @@ public class WordCount
 
     public static int getMax(List<Integer> list, Integer[] ints)
     {
-	Integer[] array = list.toArray(new Integer[list.size()]);
 	int largest = Integer.MIN_VALUE;
-	for (int i = 0; i < array.length; i++)
+	for (int i = 0; i < ints.length; i++)
 	{
-	    if (array[i] > largest)
+	    if (ints[i] > largest)
 	    {
-		if (!list.contains(i))
-		    largest = array[i];
+		if (!list.contains(new Integer(i)))
+		    largest = ints[i];
 	    }
 	}
-
+	if(largest == Integer.MIN_VALUE)
+	    largest = ints.length;
 	return largest;
     }
 
@@ -96,49 +96,56 @@ public class WordCount
 	Integer[] ints = WordCount.smallestToLargest(map.keySet().toArray(
 		new Integer[map.size()]));
 	List<Integer> skip = new ArrayList<Integer>();
-
-	for (int i = 0; i < ints.length; i++)
+	int i = 0;
+	for (;;)
 	{
-	    if (skip.size() == ints.length)
-		return;
-	    for (int t = 0; t < 1; t++)
+	    if (i == ints.length)
 	    {
-		if (skip.size() == ints.length)
-		    return;
-		if (i == getMax(skip, ints) || i == ints.length - 1)
-		{
-		    i = 0;
-		    System.out.println();
-		}
-		if (skip.contains(i))
-		{
-		    for (int u = 0; u < i + 2; u++)
-		    {
-			System.out.print(" ");
-		    }
-		    i = i == getMax(skip, ints) ? i + 1 : 0;
-		    continue;
-		}
-
-		if (map.get(ints[i]).size() > 0)
-		{
-		    System.out.print("| " + map.get(ints[i]).get(0).getWord()
-			    + "(" + map.get(ints[i]).get(0).getLength() + ") "
-			    + map.get(ints[i]).get(0).getAmount() + " | ");
-
-		    map.get(ints[i]).remove(0);
-		    t--;
-		    if (i < ints.length)
-			i++;
-		    continue;
-		} else
-		{
-		    skip.add(i);
-		}
-		t = 1;
+		i = 0;
+		continue;
 	    }
 
+	    if (skip.size() == ints.length)
+	    {
+		return;
+	    }
+
+	    if (i == getMax(skip, ints) + 1 || i == ints.length)
+	    {
+		i = 0;
+		System.out.println();
+		continue;
+	    }
+	    if (skip.contains(i))
+	    {
+		for (int u = 0; u < (i + 12) + ((i / 2) - 2); u++)
+		{
+		    System.out.print(" ");
+		}
+		i = i == getMax(skip, ints) + 1 ? 0 : i + 1;
+		continue;
+	    }
+	    if (i >= ints.length)
+		i = 0;
+	    if (map.get(ints[i]).size() > 0)
+	    {
+		System.out.print("| " + map.get(ints[i]).get(0).getWord() + "("
+			+ map.get(ints[i]).get(0).getLength() + ") "
+			+ map.get(ints[i]).get(0).getAmount() + " | ");
+
+		map.get(ints[i]).remove(0);
+		if (i < getMax(skip, ints))
+		    i++;
+		else
+		    i = 0;
+		continue;
+	    } else
+	    {
+		skip.add(i);
+		continue;
+	    }
 	}
+
     }
 
     public static void print(Map<Integer, List<Word>> map)
