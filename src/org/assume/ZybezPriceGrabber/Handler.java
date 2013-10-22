@@ -1,14 +1,11 @@
 package org.assume.ZybezPriceGrabber;
 
 import java.io.IOException;
-
-import org.assume.ZybezPriceGrabber.PriceItem;
 public class Handler implements Runnable
 {
 
 	public int price;
 	public String name;
-	private int id;
 	public Handler(String name)
 	{
 		this.name = name;

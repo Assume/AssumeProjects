@@ -57,13 +57,14 @@ public class ReverseWords
 
 	private String reverse(String s)
 	{
+		
 		StringBuilder b = new StringBuilder();
 		String[] words = s.split(" ");
 		for (int i = words.length - 1; i > -1; i--)
 		{
 			b.append(words[i] + " ");
 		}
-		return b.toString();
+		return b.toString().trim();
 
 	}
 
