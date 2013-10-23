@@ -151,9 +151,6 @@ public class WordCount
 	    }
 	    if (y == 1)
 		System.out.print("| ");
-	    else if (ints[t] == getSmallest10s(ints)
-		    || ints[t] == getMaximum(ints))
-		System.out.print("  | ");
 	    else
 		System.out.print(" | ");
 
@@ -195,10 +192,6 @@ public class WordCount
 
 		String paran = "    ";
 		String fi = "";
-		if (ints[i] % 5 == 0)
-		{
-		    paran = "(" + map.get(ints[i]).get(0).getLength() + ") ";
-		}
 		if (map.get(ints[i]).get(0).getAmount() < 10)
 		    fi = "   | ";
 		else if (map.get(ints[i]).get(0).getAmount() >= 10
