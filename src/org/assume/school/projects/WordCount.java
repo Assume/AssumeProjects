@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -48,7 +49,7 @@ public class WordCount
 	if (!horizontal)
 	    WordCount.print(WordCount.shellSort(WordCount.count(words)));
 	else
-	    WordCount.printHorizontal(WordCount.shellSort(WordCount
+	    WordCount.printHorizontal(WordCount.sortAlphabetically(WordCount
 		    .count(words)));
 	System.out.println((System.currentTimeMillis() - start));
     }
@@ -89,11 +90,75 @@ public class WordCount
 	return largest;
     }
 
+    public static int getSmallest10s(Integer[] array)
+    {
+	int smallest = Integer.MAX_VALUE;
+	for (int i = 0; i < array.length; i++)
+	{
+	    if (Integer.toString(array[i]).length() == 2)
+		if (array[i] < smallest)
+		{
+		    smallest = array[i];
+		}
+	}
+	if (smallest == Integer.MAX_VALUE)
+	    return 0;
+	return smallest;
+    }
+
+    public static int getMaximum(Integer[] array)
+    {
+	int largest = Integer.MIN_VALUE;
+	for (int i = 0; i < array.length; i++)
+	{
+	    if (array[i] > largest)
+	    {
+		largest = array[i];
+	    }
+	}
+	return largest;
+    }
+
     public static void printHorizontal(Map<Integer, List<Word>> map)
     {
 	Integer[] ints = WordCount.smallestToLargest(map.keySet().toArray(
 		new Integer[map.size()]));
 	List<Integer> skip = new ArrayList<Integer>();
+
+	for (int t = 0; t < ints.length; t++)
+	{
+
+	    int y = Integer.toString(ints[t]).length() == 1 ? 1 : 2;
+	    int r = y == 1 ? 1 : 0;
+	    if (ints[t] == 1)
+	    {
+		System.out.print("| Length " + ints[t] + " | ");
+		continue;
+	    } else
+	    {
+
+		System.out.print("|");
+
+		for (int j = 0; j < (ints[t] / 2) + r; j++)
+		{
+		    System.out.print(" ");
+		}
+		System.out.print("Length " + ints[t] + " ");
+	    }
+	    for (int x = 0; x < ((ints[t] / 2) + ints[t] % 2) - y; x++)
+	    {
+		System.out.print(" ");
+	    }
+	    if (y == 1)
+		System.out.print("| ");
+	    else if (ints[t] == getSmallest10s(ints)
+		    || ints[t] == getMaximum(ints))
+		System.out.print("  | ");
+	    else
+		System.out.print(" | ");
+
+	}
+	System.out.println();
 	int i = 0;
 	for (;;)
 	{
@@ -103,7 +168,7 @@ public class WordCount
 		System.out.println();
 		continue;
 	    }
-		
+
 	    if (skip.size() == ints.length)
 	    {
 		return;
@@ -116,7 +181,7 @@ public class WordCount
 	    }
 	    if (skip.contains(i))
 	    {
-		for (int u = 0; u < (i + 12); u++)
+		for (int u = 0; u < (i + 13); u++)
 		{
 		    System.out.print(" ");
 		}
@@ -127,9 +192,20 @@ public class WordCount
 		i = 0;
 	    if (map.get(ints[i]).size() > 0)
 	    {
-		System.out.print("| " + map.get(ints[i]).get(0).getWord() + "("
-			+ map.get(ints[i]).get(0).getLength() + ") "
-			+ map.get(ints[i]).get(0).getAmount() + " | ");
+
+		String paran = "    ";
+		String fi = "";
+		if (ints[i] % 5 == 0)
+		{
+		    paran = "(" + map.get(ints[i]).get(0).getLength() + ") ";
+		}
+		if (map.get(ints[i]).get(0).getAmount() < 10)
+		    fi = "   | ";
+		else if (map.get(ints[i]).get(0).getAmount() >= 10
+			&& map.get(ints[i]).get(0).getAmount() < 100)
+		    fi = "  | ";
+		System.out.print("| " + map.get(ints[i]).get(0).getWord()
+			+ paran + map.get(ints[i]).get(0).getAmount() + fi);
 
 		map.get(ints[i]).remove(0);
 		if (i < getMax(skip, ints))
@@ -252,6 +328,22 @@ public class WordCount
 
 	}
 	return map;
+    }
+
+    public static Map<Integer, List<Word>> sortAlphabetically(
+	    Map<Integer, List<Word>> map)
+    {
+	Integer[] ints = map.keySet().toArray(new Integer[map.size()]);
+	for (int i = 0; i < ints.length; i++)
+	{
+	    List<Word> list = map.get(ints[i]);
+	    map.remove(ints[i]);
+	    Collections.sort(list);
+	    map.put(ints[i], list);
+	}
+
+	return map;
+
     }
 
     public static Map<Integer, List<Word>> sort(Map<Integer, List<Word>> map)

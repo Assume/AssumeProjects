@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Word
+public class Word implements Comparable<Word>
 {
 
     private String word;
@@ -13,7 +13,7 @@ public class Word
 
     public Word(String word)
     {
-	this.word = word;
+	this.word = word.toLowerCase();
 	this.length = word.length();
 	this.amount = 0;
     }
@@ -89,6 +89,16 @@ public class Word
 	    return true;
 	return false;
 
+    }
+
+    @Override
+    public int compareTo(Word arg0)
+    {
+	if(this.getWord() != null && arg0.getWord() != null)
+	{
+	  return this.getWord().compareToIgnoreCase(arg0.getWord());
+	}
+	return 0;
     }
 
 }
