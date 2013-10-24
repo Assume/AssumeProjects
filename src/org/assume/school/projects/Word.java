@@ -7,10 +7,7 @@ import java.util.Random;
 public class Word implements Comparable<Word>
 {
 
-    public static final int ALPHABETICAL_SORT = 1;
-    public static final int OCCURENCE_SORT = 2;
-    public static final int HORIZONTAL_PRINT = 3;
-    public static final int VERTICAL_PRINT = 4;
+   
     
     private String word;
     private int length;

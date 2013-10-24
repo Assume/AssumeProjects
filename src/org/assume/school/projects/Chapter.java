@@ -11,6 +11,12 @@ import java.util.Map;
 public class Chapter
 {
 
+    public static final int ALPHABETICAL_SORT = 1;
+    public static final int OCCURENCE_SORT_BUBBLE = 2;
+    public static final int OCCURENCE_SORT_SHELL = 3;
+    public static final int HORIZONTAL_PRINT = 4;
+    public static final int VERTICAL_PRINT = 5;
+
     private Word[] words;
     private int sortType;
     private int printType;
@@ -28,22 +34,30 @@ public class Chapter
     public Map<Integer, List<Word>> sort()
     {
 	Map<Integer, List<Word>> map = this.count(this.words);
-
-	if (this.sortType == Word.OCCURENCE_SORT)
+	switch (this.sortType)
+	{
+	case Chapter.OCCURENCE_SORT_BUBBLE:
 	    map = this.sortByOccurence(map);
-	else if(this.sortType == Word.ALPHABETICAL_SORT)
+	    break;
+	case Chapter.ALPHABETICAL_SORT:
 	    map = this.sortAlphabetically(map);
+	    break;
+	case Chapter.OCCURENCE_SORT_SHELL:
+	    map = this.shellSort(map);
+	    break;
+	}
+
 	return map;
     }
 
     public void print()
     {
-	if(this.printType == Word.VERTICAL_PRINT)
+	if (this.printType == Chapter.VERTICAL_PRINT)
 	    this.printVertical(map);
-	else if(this.printType == Word.HORIZONTAL_PRINT)
+	else if (this.printType == Chapter.HORIZONTAL_PRINT)
 	    this.printHorizontal(map);
     }
-    
+
     private int getMax(List<Integer> list, Integer[] ints)
     {
 	int largest = Integer.MIN_VALUE;
@@ -53,35 +67,6 @@ public class Chapter
 	    {
 		if (!list.contains(new Integer(i)))
 		    largest = ints[i];
-	    }
-	}
-	return largest;
-    }
-
-    private int getSmallest10s(Integer[] array)
-    {
-	int smallest = Integer.MAX_VALUE;
-	for (int i = 0; i < array.length; i++)
-	{
-	    if (Integer.toString(array[i]).length() == 2)
-		if (array[i] < smallest)
-		{
-		    smallest = array[i];
-		}
-	}
-	if (smallest == Integer.MAX_VALUE)
-	    return 0;
-	return smallest;
-    }
-
-    private int getMaximum(Integer[] array)
-    {
-	int largest = Integer.MIN_VALUE;
-	for (int i = 0; i < array.length; i++)
-	{
-	    if (array[i] > largest)
-	    {
-		largest = array[i];
 	    }
 	}
 	return largest;

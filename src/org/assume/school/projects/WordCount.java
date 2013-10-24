@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +36,8 @@ public class WordCount
 	});
 	
 	ch.showOpenDialog(null);
-	new Chapter(getInput(ch.getSelectedFile()), Word.ALPHABETICAL_SORT,
-		Word.HORIZONTAL_PRINT);
+	new Chapter(getInput(ch.getSelectedFile()), Chapter.ALPHABETICAL_SORT,
+		Chapter.HORIZONTAL_PRINT);
 	Book.printAll();
     }
 
