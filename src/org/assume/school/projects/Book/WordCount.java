@@ -1,4 +1,4 @@
-package org.assume.school.projects;
+package org.assume.school.projects.Book;
 
 import java.io.BufferedReader;
 import java.io.File;

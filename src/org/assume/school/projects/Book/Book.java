@@ -1,4 +1,4 @@
-package org.assume.school.projects;
+package org.assume.school.projects.Book;
 
 import java.util.ArrayList;
 import java.util.List;
