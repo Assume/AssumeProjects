@@ -6,9 +6,8 @@ public abstract class FNode extends PNode
 	
 	private PNode p1;
 
-	public FNode(String[] words, PNode p1)
+	public FNode(PNode p1)
 	{
-		super(words);
 		this.p1 = p1;
 	}
 

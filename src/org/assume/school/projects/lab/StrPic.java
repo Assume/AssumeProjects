@@ -7,7 +7,8 @@ public class StrPic extends PNode
 
 	public StrPic(String[] words)
 	{
-		super(words);
+		super();
+		this.setWords(words);
 		this.completed = this.toSingleString();
 	}
 

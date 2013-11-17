@@ -7,9 +7,8 @@ public class HCat extends PNode
 	private PNode p1;
 	private PNode p2;
 
-	public HCat(String[] words, PNode p1, PNode p2)
+	public HCat(PNode p1, PNode p2)
 	{
-		super(words);
 		this.p1 = p1;
 		this.p2 = p2;
 		catted = cat();

@@ -3,9 +3,9 @@ package org.assume.school.projects.lab;
 public class VCat extends PNode
 {
 
-	public VCat(String[] words)
+	public VCat()
 	{
-		super(words);
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
