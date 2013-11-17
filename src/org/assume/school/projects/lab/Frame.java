@@ -7,10 +7,10 @@ public class Frame extends FNode
 	public static void main(String[] args)
 	{
 		String[] words = { "Spring", "In the", "Big old summer" };
-		System.out.println(new Frame(new Frame(new StrPic(words))).getString());
+		System.out.println(new Frame(new HCat(new String[] {},new Frame(new Frame(new StrPic(words))), new StrPic(new String[] {"Hey big", "bob boy big"}))).getString());
 		System.out.println();
 	}
-
+ 
 	private String framed;
 	
 	private int height;
@@ -20,7 +20,7 @@ public class Frame extends FNode
 	{
 		super(p1.getWords(), p1);
 		framed = frame();
-		super.getP1().setWords(framed.split("\n"));
+		super.setWords(framed.split("\n"));
 	}
 
 	@Override
