@@ -59,12 +59,18 @@ public class GUI extends JFrame
 		});
 	}*/
 
+	private static void goTo()
+	{
+		
+	}
+	
 	/**
 	 * Create the frame.
 	 */
 	@SuppressWarnings("unchecked")
 	public GUI()
 	{
+		
 		try
 		{
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
