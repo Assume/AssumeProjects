@@ -1,18 +1,20 @@
 package org.assume.school.projects.lab;
 
-
 public class Frame extends FNode
 {
 
 	public static void main(String[] args)
 	{
 		String[] words = { "Spring", "In the", "Big old summer" };
-		System.out.println(new Frame(new HCat(new Frame(new Frame(new StrPic(words))), new StrPic(new String[] {"Hey big", "bob boy big"}))).getString());
+		System.out.println(new VCat(new Frame(new HCat(new Frame(new Frame(
+				new StrPic(words))), new Frame(new StrPic(new String[] { "Hey big",
+				"bob boy big" })))), new StrPic(new String[] { "Bob in",
+				"in the", "summer" })).getString());
 		System.out.println();
 	}
- 
+
 	private String framed;
-	
+
 	private int height;
 	private int width;
 
@@ -67,6 +69,7 @@ public class Frame extends FNode
 		{
 			b.append(i == 0 | i == wOrig + 1 ? "+" : "-");
 		}
+		b.append("\n");
 		return b;
 	}
 
