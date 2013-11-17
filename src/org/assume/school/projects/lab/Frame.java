@@ -7,10 +7,15 @@ public class Frame extends FNode
 	{
 		String[] words = { "Spring", "In the", "Big old summer" };
 		System.out.println(new VCat(new Frame(new HCat(new Frame(new Frame(
-				new StrPic(words))), new Frame(new StrPic(new String[] { "Hey big",
-				"bob boy big" })))), new StrPic(new String[] { "Bob in",
-				"in the", "summer" })).getString());
+				new StrPic(words))), new Frame(new StrPic(new String[] {
+				"Hey big", "bob boy big" })))), new StrPic(new String[] {
+				"Bob in", "in the", "summer" })).getString());
 		System.out.println();
+
+		System.out.println(new Frame(new HCat(new Frame(new StrPic(
+				new String[] { "Bob is sad in the summer", "He is very sad",
+						"no one knows why" })), new StrPic(new String[] {
+				"Hye big bog", "Hey mab bob", "hey lob rob" }))).getString());
 	}
 
 	private String framed;
