@@ -26,6 +26,4 @@ public abstract class PNode
 		this.words = words;
 	}
 
-	
-	
 }
