@@ -19,10 +19,10 @@ public class Frame extends FNode
 								Frame.INSTANCE(StrPic.INSTANCE(words2)))));
 		p1 = Frame.INSTANCE(VCat.INSTANCE(Frame.INSTANCE(p1),
 				Frame.INSTANCE(p1)));
-		System.out
-				.println(VScrollBar.INSTANCE(Frame.INSTANCE(VCat.INSTANCE(
+		System.out.println(Frame.INSTANCE(HScrollBar.INSTANCE(VScrollBar
+				.INSTANCE(Frame.INSTANCE(VCat.INSTANCE(
 						Frame.INSTANCE(HCat.INSTANCE(p1, p1)),
-						StrPic.INSTANCE(words2)))));
+						StrPic.INSTANCE(words2)))))));
 	}
 
 	private String framed;
