@@ -6,16 +6,19 @@ public class Frame extends FNode
 	public static void main(String[] args)
 	{
 		String[] words = { "Spring", "In the", "Big old summer" };
-		System.out.println(new VCat(new Frame(new HCat(new Frame(new Frame(
-				new StrPic(words))), new Frame(new StrPic(new String[] {
-				"Hey big", "bob boy big" })))), new StrPic(new String[] {
-				"Bob in", "in the", "summer" })).getString());
-		System.out.println();
-
-		System.out.println(new Frame(new HCat(new Frame(new StrPic(
-				new String[] { "Bob is sad in the summer", "He is very sad",
-						"no one knows why" })), new StrPic(new String[] {
-				"Hye big bog", "Hey mab bob", "hey lob rob" }))).getString());
+		String[] words2 = { "Summer in the", "long old spring",
+				"is summery and summer", "and has leaves that", "are red" };
+		PNode p1 = StrPic.INSTANCE(words);
+		p1 = Frame.INSTANCE(p1);
+		p1 = VCat.INSTANCE(p1, StrPic.INSTANCE(words2));
+		p1 = HCat.INSTANCE(
+				Frame.INSTANCE(p1),
+				HCat.INSTANCE(
+						Frame.INSTANCE(p1),
+						VCat.INSTANCE(Frame.INSTANCE(p1),
+								Frame.INSTANCE(StrPic.INSTANCE(words2)))));
+		p1 = Frame.INSTANCE(VCat.INSTANCE(Frame.INSTANCE(p1), Frame.INSTANCE(p1)));
+		System.out.println(Frame.INSTANCE(VCat.INSTANCE(Frame.INSTANCE(HCat.INSTANCE(p1, p1)), StrPic.INSTANCE(words2))));
 	}
 
 	private String framed;
@@ -23,7 +26,12 @@ public class Frame extends FNode
 	private int height;
 	private int width;
 
-	public Frame(PNode p1)
+	public static Frame INSTANCE(PNode p1)
+	{
+		return new Frame(p1);
+	}
+
+	private Frame(PNode p1)
 	{
 		super(p1);
 		framed = frame();
@@ -91,6 +99,12 @@ public class Frame extends FNode
 
 	@Override
 	public String getString()
+	{
+		return this.framed;
+	}
+	
+	@Override
+	public String toString()
 	{
 		return this.framed;
 	}

@@ -7,7 +7,12 @@ public class HCat extends PNode
 	private PNode p1;
 	private PNode p2;
 
-	public HCat(PNode p1, PNode p2)
+	public static HCat INSTANCE(PNode p1, PNode p2)
+	{
+		return new HCat(p1, p2);
+	}
+	
+	private HCat(PNode p1, PNode p2)
 	{
 		this.p1 = p1;
 		this.p2 = p2;
@@ -80,4 +85,11 @@ public class HCat extends PNode
 		return this.catted;
 	}
 
+
+	@Override
+	public String toString()
+	{
+		return catted;
+	}
+	
 }

@@ -3,13 +3,13 @@ package org.assume.school.projects.lab;
 public abstract class PNode
 {
 
-	
 	private String[] words;
+
 	public PNode()
 	{
 		this.words = new String[] {};
 	}
-	
+
 	public abstract int getWidth();
 
 	public abstract int getHeight();
@@ -26,4 +26,6 @@ public abstract class PNode
 		this.words = words;
 	}
 
+	
+	
 }

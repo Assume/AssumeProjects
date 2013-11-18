@@ -20,5 +20,11 @@ public abstract class FNode extends PNode
 	{
 		this.p1 = p1;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return p1.toString();
+	}
 
 }

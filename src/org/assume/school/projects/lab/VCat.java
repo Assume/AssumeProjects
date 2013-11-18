@@ -7,7 +7,12 @@ public class VCat extends PNode
 	private PNode p1;
 	private PNode p2;
 
-	public VCat(PNode p1, PNode p2)
+	public static VCat INSTANCE(PNode p1, PNode p2)
+	{
+		return new VCat(p1, p2);
+	}
+	
+	private VCat(PNode p1, PNode p2)
 	{
 		this.p1 = p1;
 		this.p2 = p2;
@@ -46,5 +51,10 @@ public class VCat extends PNode
 		return this.catted;
 	}
 
+	@Override
+	public String toString()
+	{
+		return catted;
+	}
 
 }

@@ -5,7 +5,12 @@ public class StrPic extends PNode
 
 	private String completed;
 
-	public StrPic(String[] words)
+	public static StrPic INSTANCE(String[] words)
+	{
+		return new StrPic(words);
+	}
+	
+	private StrPic(String[] words)
 	{
 		super();
 		this.setWords(words);
