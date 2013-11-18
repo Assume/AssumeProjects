@@ -5,6 +5,7 @@ public class Frame extends FNode
 
 	public static void main(String[] args)
 	{
+		long st = System.currentTimeMillis();
 		String[] words = { "Spring", "In the", "Big old summer" };
 		String[] words2 = { "Summer in the", "long old spring",
 				"is summery and summer", "and has leaves that", "are red" };
@@ -19,10 +20,18 @@ public class Frame extends FNode
 								Frame.INSTANCE(StrPic.INSTANCE(words2)))));
 		p1 = Frame.INSTANCE(VCat.INSTANCE(Frame.INSTANCE(p1),
 				Frame.INSTANCE(p1)));
-		System.out.println(Frame.INSTANCE(HScrollBar.INSTANCE(VScrollBar
-				.INSTANCE(Frame.INSTANCE(VCat.INSTANCE(
-						Frame.INSTANCE(HCat.INSTANCE(p1, p1)),
-						StrPic.INSTANCE(words2)))))));
+		System.out
+				.println(Frame.INSTANCE(VCat.INSTANCE(
+						p1,
+						Frame.INSTANCE(VScrollBar.INSTANCE(HScrollBar.INSTANCE(Frame.INSTANCE(HCat.INSTANCE(
+								p1,
+								Frame.INSTANCE(VCat.INSTANCE(
+										p1,
+										Frame.INSTANCE(HScrollBar.INSTANCE(VScrollBar.INSTANCE(Frame.INSTANCE(VCat.INSTANCE(
+												Frame.INSTANCE(HCat.INSTANCE(
+														p1, p1)), StrPic
+														.INSTANCE(words2))))))))))))))));
+		System.out.println("Runtime: "+(System.currentTimeMillis() - st) + " milliseconds");
 	}
 
 	private String framed;
