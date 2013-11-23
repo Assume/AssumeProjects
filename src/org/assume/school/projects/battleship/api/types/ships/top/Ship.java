@@ -1,14 +1,15 @@
 package org.assume.school.projects.battleship.api.types.ships.top;
 
+import org.assume.school.projects.battleship.api.types.State.PegState;
 import org.assume.school.projects.battleship.api.types.State.ShipState;
 import org.assume.school.projects.battleship.api.types.pegs.Peg;
 import org.assume.school.projects.battleship.api.types.ships.top.interfaces.Hittable;
 
-public abstract class Ship implements Hittable
+public class Ship implements Hittable
 {
 
 	public static final int HORIZONTAL = 1;
-	public static final int VERTICAl = 2;
+	public static final int VERTICAL = 2;
 
 	private final int size;
 	private final Peg[] pegs;
@@ -90,6 +91,83 @@ public abstract class Ship implements Hittable
 	public Peg[] getPegs()
 	{
 		return pegs;
+	}
+
+	@Override
+	public boolean isInProbe(int topRow, int bottomRow, int leftCol,
+			int rightCol)
+	{
+		if (this.orientation == Ship.VERTICAL)
+		{
+			if (this.getCol() < leftCol && this.getCol() > rightCol)
+				return false;
+			for (int i = 0; i < this.getSize(); i++)
+			{
+				int row = this.getRow() - i;
+				if (row <= topRow && row >= bottomRow) return true;
+			}
+		}
+		else if (this.orientation == Ship.HORIZONTAL)
+		{
+			if (this.getRow() > topRow && this.getRow() < bottomRow)
+				return false;
+			for (int i = 0; i < this.getSize(); i++)
+			{
+				int col = this.getCol() + i;
+				if (col >= leftCol && col <= rightCol) return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public int getPointsInProbe(int topRow, int bottomRow, int leftCol,
+			int rightCol)
+	{
+		int total = 0;
+		if (!isInProbe(topRow, bottomRow, leftCol, rightCol))
+			return 0;
+		else
+		{
+			if (this.orientation == Ship.VERTICAL)
+			{
+				for (int i = 0; i < this.getSize(); i++)
+				{
+					int row = this.getRow() - i;
+					if (row <= topRow && row >= bottomRow) total++;
+				}
+			}
+			else if (this.orientation == Ship.HORIZONTAL)
+			{
+				for (int i = 0; i < this.getSize(); i++)
+				{
+					int col = this.getCol() + i;
+					if (col >= leftCol && col <= rightCol) total++;
+				}
+			}
+		}
+		return total;
+	}
+
+	@Override
+	public boolean doesPegHit(int row, int col)
+	{
+		if (this.orientation == Ship.VERTICAL)
+			return this.row == row && col <= this.col
+					&& col >= (this.col - this.size);
+		else if (this.orientation == Ship.HORIZONTAL)
+			return this.col == col && row >= this.row
+					&& row <= (this.row - this.size);
+		return false;
+	}
+
+	@Override
+	public void onHit(int row, int col)
+	{
+		if (this.orientation == Ship.VERTICAL)
+			this.pegs[row - this.row].setState(PegState.HIT);
+		else if (this.orientation == Ship.HORIZONTAL)
+			this.pegs[col - this.col].setState(PegState.HIT);
 	}
 
 }
