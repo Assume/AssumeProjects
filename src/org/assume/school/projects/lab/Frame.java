@@ -20,8 +20,8 @@ public class Frame extends FNode
 								Frame.INSTANCE(StrPic.INSTANCE(words2)))));
 		p1 = Frame.INSTANCE(VCat.INSTANCE(Frame.INSTANCE(p1),
 				Frame.INSTANCE(p1)));
-		System.out
-				.println(Frame.INSTANCE(VCat.INSTANCE(
+		p1 = Frame
+				.INSTANCE(VCat.INSTANCE(
 						p1,
 						Frame.INSTANCE(VScrollBar.INSTANCE(HScrollBar.INSTANCE(Frame.INSTANCE(HCat.INSTANCE(
 								p1,
@@ -30,8 +30,10 @@ public class Frame extends FNode
 										Frame.INSTANCE(HScrollBar.INSTANCE(VScrollBar.INSTANCE(Frame.INSTANCE(VCat.INSTANCE(
 												Frame.INSTANCE(HCat.INSTANCE(
 														p1, p1)), StrPic
-														.INSTANCE(words2))))))))))))))));
-		System.out.println("Runtime: "+(System.currentTimeMillis() - st) + " milliseconds");
+														.INSTANCE(words2)))))))))))))));
+		System.out.println(p1);
+		System.out.println("Runtime: " + (System.currentTimeMillis() - st)
+				+ " milliseconds");
 	}
 
 	private String framed;
