@@ -2,9 +2,6 @@ package org.assume.school.projects.battleship.api.types.board;
 
 import org.assume.school.projects.battleship.api.types.State.LocationState;
 import org.assume.school.projects.battleship.api.types.board.interfaces.Playable;
-import org.assume.school.projects.battleship.api.types.ships.bottom.AircraftCarrier;
-import org.assume.school.projects.battleship.api.types.ships.bottom.BattleShip;
-import org.assume.school.projects.battleship.api.types.ships.bottom.Cruiser;
 import org.assume.school.projects.battleship.api.types.ships.top.Ship;
 import org.assume.school.projects.battleship.api.types.users.Player;
 
@@ -13,7 +10,7 @@ public class GameBoard implements Playable
 
 	public static void main(String[] args)
 	{
-		Player p = new Player("Adam");
+		/*Player p = new Player("Adam");
 		Player p2 = new Player("Roy");
 
 		p.setOpponent(p2);
@@ -32,7 +29,7 @@ public class GameBoard implements Playable
 		p.attack(6, 2);
 
 		System.out.println(p);
-		System.out.println(p2);
+		System.out.println(p2);*/
 	}
 
 	private final Location[][] grid;

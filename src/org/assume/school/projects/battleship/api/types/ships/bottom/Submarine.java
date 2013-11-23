@@ -1,14 +1,29 @@
 package org.assume.school.projects.battleship.api.types.ships.bottom;
 
+import java.util.Scanner;
+
 import org.assume.school.projects.battleship.api.types.State.ShipState;
 import org.assume.school.projects.battleship.api.types.ships.top.Ship;
+import org.assume.school.projects.battleship.api.types.users.Player;
 
 public class Submarine extends Ship
 {
 
-	public static Submarine getInstance(int row, int col, int orientation)
+	public static void getInstance(boolean fail, Player p)
 	{
-		return new Submarine(3, row, col, orientation, ShipState.ALIVE);
+		if(fail)
+			System.out.println("Invalid location");
+		Scanner in = new Scanner(System.in);
+		System.out.print("Enter row location for Submarine Carrier: ");
+		int row = in.nextInt();
+		System.out.print("Enter column location for Submarine Carrier: ");
+		int col = in.nextInt();
+		System.out.print("Enter orientation (1 for horizontal, 2 for vertical)");
+		int or = in.nextInt();
+		if(p.addShip(new Submarine(3, row, col, or, ShipState.ALIVE)))
+			return;
+		else
+			getInstance(true, p);
 	}
 	
 	private Submarine(int size, int row, int col, int orientation,
