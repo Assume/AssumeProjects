@@ -20,7 +20,7 @@ public class GameBoard implements Playable
 	p2.setOpponent(p);
 	AircraftCarrier.createInstance(p);
 	System.out.println(p);
-	p.executeCommand(new MoveCommand(MoveCommand.DOWN, p.getShips().get(0),
+	p.executeCommand(new MoveCommand(MoveCommand.LEFT, p.getShips().get(0),
 		p));
 	System.out.println(p);
 
@@ -200,14 +200,37 @@ public class GameBoard implements Playable
     {
 	if (ship.getOrientation() == Ship.VERTICAL)
 	{
-	    for (int i = ship.getCol(); i < ship.getCol() + ship.getSize(); i++)
-		this.grid[ship.getRow()][i]
-			.setState(this.grid[ship.getRow()][i - 1].getState());
-	    this.grid[ship.getRow()][ship.getCol() - 1]
-		    .setState(LocationState.EMPTY);
+	    for (int i = ship.getRow(); i < ship.getCol() + ship.getSize(); i++)
+		this.grid[i][ship.getCol()]
+			.setState(this.grid[i][ship.getCol() - 1].getState());
+	    for (int i = ship.getRow(); i < ship.getRow() + ship.getSize(); i++)
+		this.grid[i][ship.getCol() - 1].setState(LocationState.EMPTY);
 	} else if (ship.getOrientation() == Ship.HORIZONTAL)
 	{
+	    for (int i = ship.getCol(); i < ship.getCol() + ship.getSize() - 1; i++)
+		this.grid[ship.getRow()][i + 1].setState(this.grid[ship
+			.getRow()][i - 1].getState());
+	    this.grid[ship.getRow()][ship.getCol() - 1]
+		    .setState(LocationState.EMPTY);
+	}
+    }
 
+    private void moveShipLeft(Ship ship)
+    {
+	if (ship.getOrientation() == Ship.VERTICAL)
+	{
+	    for (int i = ship.getRow(); i < ship.getCol() + ship.getSize() + 1; i++)
+		this.grid[i][ship.getCol()]
+			.setState(this.grid[i][ship.getCol() + 1].getState());
+	    for (int i = ship.getRow(); i < ship.getRow() + ship.getSize(); i++)
+		this.grid[i][ship.getCol() + 1].setState(LocationState.EMPTY);
+	} else if (ship.getOrientation() == Ship.HORIZONTAL)
+	{
+	    for (int i = ship.getCol(); i < ship.getCol() + ship.getSize(); i++)
+		this.grid[ship.getRow()][i]
+			.setState(this.grid[ship.getRow()][i + 1].getState());
+	    this.grid[ship.getRow()][ship.getCol() + ship.getSize()]
+		    .setState(LocationState.EMPTY);
 	}
     }
 
@@ -223,8 +246,12 @@ public class GameBoard implements Playable
 	    this.moveShipDown(ship);
 	} else if (direction == MoveCommand.RIGHT)
 	{
-
+	    this.moveShipRight(ship);
+	} else if (direction == MoveCommand.LEFT)
+	{
+	    this.moveShipLeft(ship);
 	}
 
     }
+
 }
