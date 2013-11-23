@@ -154,7 +154,8 @@ public class Ship implements Hittable
 	@Override
 	public boolean doesPegHit(int row, int col, GameBoard board)
 	{
-		return board.getGrid()[row][col].getState().equals(LocationState.SHIP_PART);
+		return board.getGrid()[row][col].getState().equals(
+				LocationState.SHIP_PART);
 	}
 
 	@Override
@@ -189,15 +190,22 @@ public class Ship implements Hittable
 	@Override
 	public boolean isOnShip(int row, int col)
 	{
-		if(this.getOrientation() == Ship.VERTICAL)
+		if (this.getOrientation() == Ship.VERTICAL)
 		{
-			for(int i = this.row; i < this.row + this.size; i++)
+			for (int i = this.row; i < this.row + this.size; i++)
 			{
-				if(i == row && col == this.col)
-					return true;
+				if (i == row) return true;
+			}
+		}
+		else if (this.getOrientation() == Ship.HORIZONTAL)
+		{
+			if (this.row != row) return false;
+			for (int i = this.col; i < this.col + this.size; i++)
+			{
+				if (i == col) return true;
 			}
 		}
 		return false;
 	}
-	
+
 }

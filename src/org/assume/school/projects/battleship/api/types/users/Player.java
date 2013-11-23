@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.assume.school.projects.battleship.api.types.board.GameBoard;
+import org.assume.school.projects.battleship.api.types.command.interfaces.Commandable;
 import org.assume.school.projects.battleship.api.types.ships.top.Ship;
 
 public class Player
@@ -44,24 +45,35 @@ public class Player
 
 	}
 
+	public void executeCommand(Commandable command)
+	{
+		command.execute();
+	}
+
 	public boolean addShip(Ship s)
 	{
-		if (!ships.contains(s)
-				&& this.board.isShipPlacementValid(s.getRow(), s.getCol(),
-						s.getOrientation(), s.getSize()))
+		String code = this.board.isShipPlacementValid(s.getRow(), s.getCol(),
+				s.getOrientation(), s.getSize());
+		if (!ships.contains(s))
 		{
-			this.board.addShip(s);
-			this.ships.add(s);
-			return true;
+			if (this.board.isCodeValid(code))
+			{
+				this.board.addShip(s);
+				this.ships.add(s);
+				return true;
+			}
+			else
+			{
+				System.out.println(code);
+			}
 		}
 		else
 		{
-			System.out.println("Ship already added here[r" + s.getRow() + ",c"
-					+ s.getCol()
-					+ "] or you have already added a ship of this type["
+			System.out.println("You have already added a ship of this type["
 					+ s.getClass().getSimpleName() + "]");
 			return false;
 		}
+		return false;
 
 	}
 

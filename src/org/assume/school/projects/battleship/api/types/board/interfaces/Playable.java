@@ -6,7 +6,7 @@ import org.assume.school.projects.battleship.api.types.users.Player;
 public interface Playable
 {
 
-	public boolean isShipPlacementValid(int row, int col, int orientation, int size);
+	public String isShipPlacementValid(int row, int col, int orientation, int size);
 	
 	public boolean isAttackValid(int row, int col, Player attackee);
 	
@@ -19,6 +19,10 @@ public interface Playable
 	public void onHit(int row, int col);
 	
 	public void onMiss(int row, int col);
+	
+	public boolean isCodeValid(String code);
+	
+	public void moveShip(Ship ship, int direction);
 	
 	
 }

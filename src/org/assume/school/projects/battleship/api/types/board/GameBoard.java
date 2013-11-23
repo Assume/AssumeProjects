@@ -2,6 +2,8 @@ package org.assume.school.projects.battleship.api.types.board;
 
 import org.assume.school.projects.battleship.api.types.State.LocationState;
 import org.assume.school.projects.battleship.api.types.board.interfaces.Playable;
+import org.assume.school.projects.battleship.api.types.command.MoveCommand;
+import org.assume.school.projects.battleship.api.types.ships.bottom.AircraftCarrier;
 import org.assume.school.projects.battleship.api.types.ships.top.Ship;
 import org.assume.school.projects.battleship.api.types.users.Player;
 
@@ -10,26 +12,17 @@ public class GameBoard implements Playable
 
 	public static void main(String[] args)
 	{
-		/*Player p = new Player("Adam");
+
+		Player p = new Player("Adam");
 		Player p2 = new Player("Roy");
 
 		p.setOpponent(p2);
 		p2.setOpponent(p);
-		p.addShip(BattleShip.getInstance(3, 2, Ship.VERTICAL));
-		p.addShip(AircraftCarrier.getInstance(0, 5, Ship.VERTICAL));
-		p.addShip(Cruiser.getInstance(2, 8, Ship.VERTICAL));
-
-		p2.addShip(BattleShip.getInstance(3, 2, Ship.VERTICAL));
-		p2.addShip(AircraftCarrier.getInstance(0, 5, Ship.VERTICAL));
-		p2.addShip(Cruiser.getInstance(2, 8, Ship.VERTICAL));
-
-		p.attack(3, 2);
-		p.attack(4, 2);
-		p.attack(5, 2);
-		p.attack(6, 2);
-
+		AircraftCarrier.createInstance(p);
 		System.out.println(p);
-		System.out.println(p2);*/
+		p.executeCommand(new MoveCommand(MoveCommand.UP, p.getShips().get(0), p));
+		System.out.println(p);
+
 	}
 
 	private final Location[][] grid;
@@ -40,29 +33,42 @@ public class GameBoard implements Playable
 	}
 
 	@Override
-	public boolean isShipPlacementValid(int row, int col, int orientation,
+	public String isShipPlacementValid(int row, int col, int orientation,
 			int size)
 	{
 		if (orientation == Ship.VERTICAL)
 		{
-			if (row + size >= this.grid.length) return false;
+			if (row + size > this.grid.length)
+				return "Invalid. Ship will be off board! loc[r" + row + ",c"
+						+ col + "]";
 			for (int i = 0; i < size; i++)
 			{
-
 				if (!this.grid[row + i][col].getState().equals(
-						LocationState.EMPTY)) return false;
+						LocationState.EMPTY))
+					return "Invalid. Space already taken by other ship! loc[r"
+							+ row + ",c" + col + "]";
 			}
 		}
 		else if (orientation == Ship.HORIZONTAL)
 		{
-			if (col + size >= 10) return false;
+			if (col + size > 10)
+				return "Invalid. Ship will be off board! loc[r" + row + ",c"
+						+ col + "]";
 			for (int i = 0; i < size; i++)
 			{
 				if (!this.grid[row][col + i].getState().equals(
-						LocationState.EMPTY)) return false;
+						LocationState.EMPTY))
+					return "Invalid. Space already taken by other ship! loc[r"
+							+ row + ",c" + col + "]";
 			}
 		}
-		return true;
+		return "Valid";
+	}
+
+	@Override
+	public boolean isCodeValid(String code)
+	{
+		return code.equals("Valid");
 	}
 
 	@Override
@@ -102,7 +108,6 @@ public class GameBoard implements Playable
 			{
 				this.grid[s.getRow() + i][s.getCol()]
 						.setState(LocationState.SHIP_PART);
-				;
 			}
 		}
 		else if (s.getOrientation() == Ship.HORIZONTAL)
@@ -148,6 +153,23 @@ public class GameBoard implements Playable
 	{
 		this.grid[row][col].setState(LocationState.PEG);
 
+	}
+
+	@Override
+	public void moveShip(Ship ship, int direction)
+	{
+		if (direction == MoveCommand.UP)
+		{
+			for (int i = ship.getRow(); i < ship.getRow() + ship.getSize(); i++)
+				this.grid[i][ship.getCol()].setState(this.grid[i + 1][ship
+						.getCol()].getState());
+			this.grid[ship.getRow() + ship.getSize()][ship.getCol()]
+					.setState(LocationState.EMPTY);
+		}
+		else if (direction == MoveCommand.DOWN)
+			for (int i = ship.getRow(); i < ship.getRow() + ship.getSize(); i++)
+				this.grid[i][ship.getCol()].setState(this.grid[i - 1][ship
+						.getCol()].getState());
 	}
 
 }
