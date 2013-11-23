@@ -1,5 +1,7 @@
 package org.assume.school.projects.battleship.api.types.ships.top.interfaces;
 
+import org.assume.school.projects.battleship.api.types.board.GameBoard;
+
 public interface Hittable
 {
 
@@ -7,12 +9,14 @@ public interface Hittable
 	
 	public int getPointsInProbe(int topRow, int bottomRow, int leftCol, int rightCol);
 	
-	public boolean doesPegHit(int row, int col);
+	public boolean doesPegHit(int row, int col, GameBoard board);
 	
 	public void onHit(int row, int col);
 	
 	public int getPegsLeft();
 	
 	public boolean isSunk();
+	
+	public boolean isOnShip(int row, int col);
 	
 }

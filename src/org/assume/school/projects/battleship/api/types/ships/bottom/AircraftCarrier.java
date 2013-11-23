@@ -17,4 +17,10 @@ public class AircraftCarrier extends Ship
 		super(size, row, col, orientation, state);
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		return o instanceof AircraftCarrier;
+	}
+	
 }

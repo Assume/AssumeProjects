@@ -17,4 +17,10 @@ public class Submarine extends Ship
 		super(size, row, col, orientation, state);
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		return o instanceof Submarine;
+	}
+	
 }

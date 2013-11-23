@@ -9,11 +9,6 @@ import org.assume.school.projects.battleship.api.types.ships.top.Ship;
 public class Player
 {
 
-	public static int TOTAL_PLAYERS = 0;
-
-	public static Player PLAYER_ONE;
-	public static Player PLAYER_TWO;
-
 	private String name;
 	private GameBoard board;
 	private Player opponent;
@@ -24,34 +19,57 @@ public class Player
 		this.name = name;
 		this.board = new GameBoard();
 		this.ships = new ArrayList<Ship>();
-		Player.PLAYER_ONE = Player.PLAYER_ONE == null ? this
-				: Player.PLAYER_ONE;
-		Player.PLAYER_TWO = Player.PLAYER_ONE == opponent ? this : null;
-		this.opponent = Player.PLAYER_ONE == null ? PLAYER_TWO : PLAYER_ONE;
-
 	}
 
 	public void attack(int row, int col)
 	{
 		if (board.isAttackValid(row, col, this.opponent))
 		{
-			System.out.println("Direct hit on opponent at: row[" + row
-					+ "], col[" + col + "]");
+			System.out.println("Direct hit on " + this.opponent.getName()
+					+ " at: row[" + row + "], col[" + col + "]");
 			Ship ship = this.getOpponent().getShipAt(row, col);
-			if(ship == null)
-				return;
-			if(ship.isSunk())
-				System.out.println("Congratulations! You sunk"+ship.toString());
+			if (ship == null) return;
+			ship.onHit(row, col);
+			this.board.onHit(row, col);
+			if (ship.isSunk())
+				System.out.println("Congratulations! You sunk "
+						+ this.opponent.getName() + "'s " + ship.toString());
+		}
+		else
+		{
+			System.out.println("Missed " + this.opponent.getName()
+					+ " at: row[" + row + "], col[" + col + "]");
+			this.board.onMiss(row, col);
+		}
+
+	}
+
+	public boolean addShip(Ship s)
+	{
+		if (!ships.contains(s)
+				&& this.board.isShipPlacementValid(s.getRow(), s.getCol(),
+						s.getOrientation(), s.getSize()))
+		{
+			this.board.addShip(s);
+			this.ships.add(s);
+			return true;
+		}
+		else
+		{
+			System.out.println("Ship already added here[r" + s.getRow() + ",c"
+					+ s.getCol()
+					+ "] or you have already added a ship of this type["
+					+ s.getClass().getSimpleName() + "]");
+			return false;
 		}
 
 	}
 
 	public Ship getShipAt(int row, int col)
 	{
-		for(Ship s : ships)
+		for (Ship s : ships)
 		{
-			if(s.getRow() == row && s.getCol() == col)
-				return s;
+			if (s.isOnShip(row, col)) return s;
 		}
 		return null;
 	}
@@ -89,6 +107,12 @@ public class Player
 	public GameBoard getBoard()
 	{
 		return board;
+	}
+
+	@Override
+	public String toString()
+	{
+		return this.name + "\n" + this.board.toString();
 	}
 
 }

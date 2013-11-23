@@ -1,7 +1,9 @@
 package org.assume.school.projects.battleship.api.types.ships.top;
 
+import org.assume.school.projects.battleship.api.types.State.LocationState;
 import org.assume.school.projects.battleship.api.types.State.PegState;
 import org.assume.school.projects.battleship.api.types.State.ShipState;
+import org.assume.school.projects.battleship.api.types.board.GameBoard;
 import org.assume.school.projects.battleship.api.types.pegs.Peg;
 import org.assume.school.projects.battleship.api.types.ships.top.interfaces.Hittable;
 
@@ -150,15 +152,9 @@ public class Ship implements Hittable
 	}
 
 	@Override
-	public boolean doesPegHit(int row, int col)
+	public boolean doesPegHit(int row, int col, GameBoard board)
 	{
-		if (this.orientation == Ship.VERTICAL)
-			return this.row == row && col <= this.col
-					&& col >= (this.col - this.size);
-		else if (this.orientation == Ship.HORIZONTAL)
-			return this.col == col && row >= this.row
-					&& row <= (this.row - this.size);
-		return false;
+		return board.getGrid()[row][col].getState().equals(LocationState.SHIP_PART);
 	}
 
 	@Override
@@ -187,7 +183,21 @@ public class Ship implements Hittable
 	@Override
 	public String toString()
 	{
-		return this.getClass().getName();
+		return this.getClass().getSimpleName();
 	}
 
+	@Override
+	public boolean isOnShip(int row, int col)
+	{
+		if(this.getOrientation() == Ship.VERTICAL)
+		{
+			for(int i = this.row; i < this.row + this.size; i++)
+			{
+				if(i == row && col == this.col)
+					return true;
+			}
+		}
+		return false;
+	}
+	
 }
