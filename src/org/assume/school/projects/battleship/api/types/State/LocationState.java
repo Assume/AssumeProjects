@@ -1,6 +1,8 @@
 package org.assume.school.projects.battleship.api.types.State;
 
-public enum ShipState
+public enum LocationState
 {
-	DEAD, ALIVE	
+
+	EMPTY, PEG, SHIP_PART
+	
 }

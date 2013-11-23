@@ -168,6 +168,26 @@ public class Ship implements Hittable
 			this.pegs[row - this.row].setState(PegState.HIT);
 		else if (this.orientation == Ship.HORIZONTAL)
 			this.pegs[col - this.col].setState(PegState.HIT);
+		this.pegsHit++;
+		if (this.getPegsLeft() == 0) this.setShipState(ShipState.DEAD);
+	}
+
+	@Override
+	public int getPegsLeft()
+	{
+		return this.size - this.pegsHit;
+	}
+
+	@Override
+	public boolean isSunk()
+	{
+		return this.getShipState().equals(ShipState.DEAD);
+	}
+
+	@Override
+	public String toString()
+	{
+		return this.getClass().getName();
 	}
 
 }

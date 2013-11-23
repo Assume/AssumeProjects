@@ -11,5 +11,8 @@ public interface Hittable
 	
 	public void onHit(int row, int col);
 	
+	public int getPegsLeft();
+	
+	public boolean isSunk();
 	
 }
