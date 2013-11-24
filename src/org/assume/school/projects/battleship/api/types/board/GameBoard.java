@@ -3,27 +3,12 @@ package org.assume.school.projects.battleship.api.types.board;
 import org.assume.school.projects.battleship.api.types.State.LocationState;
 import org.assume.school.projects.battleship.api.types.board.interfaces.Playable;
 import org.assume.school.projects.battleship.api.types.command.commands.MoveCommand;
-import org.assume.school.projects.battleship.api.types.ships.bottom.AircraftCarrier;
 import org.assume.school.projects.battleship.api.types.ships.top.Ship;
 import org.assume.school.projects.battleship.api.types.users.Player;
 
 public class GameBoard implements Playable
 {
 
-    public static void main(String[] args)
-    {
-
-	Player p = new Player("Adam");
-	Player p2 = new Player("Roy");
-
-	p.setOpponent(p2);
-	p2.setOpponent(p);
-	AircraftCarrier.createInstance(p);
-	System.out.println(p);
-	p.executeCommand(MoveCommand.createInstance(p));
-	System.out.println(p);
-
-    }
 
     private final Location[][] grid;
 

@@ -3,7 +3,6 @@ package org.assume.school.projects.battleship.main;
 import java.util.Scanner;
 
 import org.assume.school.projects.battleship.api.types.command.Command;
-import org.assume.school.projects.battleship.api.types.command.commands.MoveCommand;
 import org.assume.school.projects.battleship.api.types.command.commands.PrintBoardCommand;
 import org.assume.school.projects.battleship.api.types.command.interfaces.Commandable;
 import org.assume.school.projects.battleship.api.types.ships.bottom.AircraftCarrier;
