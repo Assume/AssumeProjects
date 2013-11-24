@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import org.assume.school.projects.battleship.api.types.command.commands.AttackCommand;
 import org.assume.school.projects.battleship.api.types.command.commands.MoveCommand;
+import org.assume.school.projects.battleship.api.types.command.commands.PrintBoardCommand;
 import org.assume.school.projects.battleship.api.types.command.commands.ProbeCommand;
 import org.assume.school.projects.battleship.api.types.command.interfaces.Commandable;
 import org.assume.school.projects.battleship.api.types.users.Player;
@@ -19,22 +20,32 @@ public class Command
 
     public static final String MOVE_STRING = "move";
     public static final int MOVE_INT = 3;
+    
+    public static final String PRINT_OWN_BOARD_STRING = "own board";
+    public static final int PRINT_OWN_BOARD_INT = 4;
 
     public static final String ORIENTATION_CHANGE_STRING = "orientation";
-    public static final int ORIENTATION_CHANGE = 4;
+    public static final int ORIENTATION_CHANGE = 5;
 
     public static Commandable getCommand(Player player)
     {
-	Scanner in = new Scanner(System.in);
-	System.out
-		.print("Choose a command: \n 1. Attack \n 2. Probe \n 3. Move Ship");
-	int com = in.nextInt();
-	if (Command.isCommandValid(com))
+	try
 	{
-	    return Command.createCommand(com, player);
-	} else
+	    Scanner in = new Scanner(System.in);
+	    System.out.print("Choose a command(" + player.getName()
+		    + "): \n 1. Attack \n 2. Probe \n 3. Move Ship \n 4. Print your board");
+	    int com = in.nextInt();
+	    if (Command.isCommandValid(com))
+	    {
+		return Command.createCommand(com, player);
+	    } else
+	    {
+		System.out.println("Invalid input. Please try again");
+		return Command.getCommand(player);
+	    }
+	} catch (Exception e)
 	{
-	    System.out.println("Invalid input. Please try again");
+	    System.out.println("Input incorrect. Try again");
 	    return Command.getCommand(player);
 	}
 
@@ -50,7 +61,8 @@ public class Command
 	    return ProbeCommand.createInstance(player);
 	case 3:
 	    return MoveCommand.createInstance(player);
-
+	case 4: 
+	    return PrintBoardCommand.createInstance(player);
 	}
 	return null;
     }
@@ -58,6 +70,6 @@ public class Command
     public static boolean isCommandValid(int command)
     {
 	return command == Command.ATTACK_INT || command == Command.PROBE_INT
-		|| command == Command.MOVE_INT;
+		|| command == Command.MOVE_INT || command  == Command.PRINT_OWN_BOARD_INT;
     }
 }

@@ -18,23 +18,30 @@ public class MoveCommand implements Commandable
 
     public static MoveCommand createInstance(Player player)
     {
-	Scanner in = new Scanner(System.in);
-	System.out
-		.print("Choose Ship to move: \n 1. Aircraft Carrier \n 2. Battleship \n 3. Submarine \n 4. Cruiser \n 5. Destroyer");
-	Ship ship = player.getShips().get(in.nextInt() - 1);
-	System.out
-		.print("Choose direction: \n 1. Up\n 2. Down\n 3. Left \n 4. left");
-	int dir = in.nextInt();
-
-	MoveCommand move = new MoveCommand(dir, ship, player);
-	if (move.canExecute())
-	    return move;
-	else
+	try
 	{
-	    System.out.println("Move not valid. Please try again");
+
+	    Scanner in = new Scanner(System.in);
+	    System.out
+		    .print("Choose Ship to move: \n 1. Aircraft Carrier \n 2. Battleship \n 3. Submarine \n 4. Cruiser \n 5. Destroyer");
+	    Ship ship = player.getShips().get(in.nextInt() - 1);
+	    System.out
+		    .print("Choose direction: \n 1. Up\n 2. Down\n 3. Left \n 4. left");
+	    int dir = in.nextInt();
+
+	    MoveCommand move = new MoveCommand(dir, ship, player);
+	    if (move.canExecute())
+		return move;
+	    else
+	    {
+		System.out.println("Move not valid. Please try again");
+		return MoveCommand.createInstance(player);
+	    }
+	} catch (Exception e)
+	{
+	    System.out.println("Incorrect input. Please try again.");
 	    return MoveCommand.createInstance(player);
 	}
-
     }
 
     private int direction;

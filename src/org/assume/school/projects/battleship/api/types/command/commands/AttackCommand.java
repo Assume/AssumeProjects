@@ -10,12 +10,19 @@ public class AttackCommand implements Commandable
 
     public static AttackCommand createInstance(Player player)
     {
-	Scanner in = new Scanner(System.in);
-	System.out.print("Enter row: ");
-	int row = in.nextInt();
-	System.out.print("Enter column");
-	int col = in.nextInt();
-	return new AttackCommand(row, col, player);
+	try
+	{
+	    Scanner in = new Scanner(System.in);
+	    System.out.print("Enter row: ");
+	    int row = in.nextInt();
+	    System.out.print("Enter column");
+	    int col = in.nextInt();
+	    return new AttackCommand(row, col, player);
+	} catch (Exception e)
+	{
+	    System.out.println("Incorrect input. Please try again.");
+	    return AttackCommand.createInstance(player);
+	}
 
     }
 

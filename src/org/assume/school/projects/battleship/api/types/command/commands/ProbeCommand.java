@@ -10,22 +10,28 @@ public class ProbeCommand implements Commandable
 
     public static ProbeCommand createInstance(Player player)
     {
-	// int topRow, int bottomRow, int leftCol,
-	// int rightCol;
-	Scanner in = new Scanner(System.in);
-	System.out.print("Enter top row: ");
-	int topRow = in.nextInt();
-	System.out.print("Enter bottom row: ");
-	int bottomRow = in.nextInt();
-	System.out.println("Enter left column: ");
-	int leftCol = in.nextInt();
-	System.out.println("Enter right column: ");
-	int rightCol = in.nextInt();
+	try
+	{
+	    Scanner in = new Scanner(System.in);
+	    System.out.print("Enter top row: ");
+	    int topRow = in.nextInt();
+	    System.out.print("Enter bottom row: ");
+	    int bottomRow = in.nextInt();
+	    System.out.println("Enter left column: ");
+	    int leftCol = in.nextInt();
+	    System.out.println("Enter right column: ");
+	    int rightCol = in.nextInt();
 
-	bottomRow = bottomRow - topRow > 3 ? topRow + 3 : bottomRow;
-	leftCol = rightCol - leftCol > 3 ? leftCol + 3 : leftCol;
+	    bottomRow = bottomRow - topRow > 3 ? topRow + 3 : bottomRow;
+	    leftCol = rightCol - leftCol > 3 ? leftCol + 3 : leftCol;
 
-	return new ProbeCommand(topRow, bottomRow, leftCol, rightCol, player);
+	    return new ProbeCommand(topRow, bottomRow, leftCol, rightCol,
+		    player);
+	} catch (Exception e)
+	{
+	    System.out.println("Incorrect input. Please try again.");
+	    return ProbeCommand.createInstance(player);
+	}
 
     }
 
