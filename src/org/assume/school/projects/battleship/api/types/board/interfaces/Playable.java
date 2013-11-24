@@ -12,6 +12,8 @@ public interface Playable
 	
 	public boolean isProbeEmpty(int topRow, int bottomRow, int leftCol, int rightCol, Player probee);
 	
+	public int getShipPartsInProbe(int topRow, int bottomRow, int leftCol, int rightCol, Player probee);
+	
 	public void addShip(Ship s);
 	
 	public Ship getShipAt(int row, int col, Player probee);

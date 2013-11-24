@@ -2,7 +2,7 @@ package org.assume.school.projects.battleship.api.types.board;
 
 import org.assume.school.projects.battleship.api.types.State.LocationState;
 import org.assume.school.projects.battleship.api.types.board.interfaces.Playable;
-import org.assume.school.projects.battleship.api.types.command.MoveCommand;
+import org.assume.school.projects.battleship.api.types.command.commands.MoveCommand;
 import org.assume.school.projects.battleship.api.types.ships.bottom.AircraftCarrier;
 import org.assume.school.projects.battleship.api.types.ships.top.Ship;
 import org.assume.school.projects.battleship.api.types.users.Player;
@@ -20,8 +20,7 @@ public class GameBoard implements Playable
 	p2.setOpponent(p);
 	AircraftCarrier.createInstance(p);
 	System.out.println(p);
-	p.executeCommand(new MoveCommand(MoveCommand.LEFT, p.getShips().get(0),
-		p));
+	p.executeCommand(MoveCommand.createInstance(p));
 	System.out.println(p);
 
     }
@@ -86,7 +85,24 @@ public class GameBoard implements Playable
     public boolean isProbeEmpty(int topRow, int bottomRow, int leftCol,
 	    int rightCol, Player probee)
     {
-	return false;
+	for (Ship s : probee.getShips())
+	{
+	    if (s.isInProbe(topRow, bottomRow, leftCol, rightCol))
+		return false;
+	}
+	return true;
+    }
+
+    @Override
+    public int getShipPartsInProbe(int topRow, int bottomRow, int leftCol,
+	    int rightCol, Player probee)
+    {
+	int total = 0;
+	for (Ship s : probee.getShips())
+	{
+	    total += s.getPointsInProbe(topRow, bottomRow, leftCol, rightCol);
+	}
+	return total;
     }
 
     @Override
