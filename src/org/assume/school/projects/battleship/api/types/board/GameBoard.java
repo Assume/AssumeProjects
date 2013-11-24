@@ -152,8 +152,8 @@ public class GameBoard implements Playable
     @Override
     public void onMiss(int row, int col)
     {
-	this.grid[row][col].setState(LocationState.PEG);
-
+	if(this.grid[row][col].getState().equals(LocationState.EMPTY))
+	    this.grid[row][col].setState(LocationState.PEG);
     }
 
     private void moveShipUp(Ship ship)
