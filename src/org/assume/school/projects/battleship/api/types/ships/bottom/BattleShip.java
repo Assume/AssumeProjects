@@ -18,6 +18,7 @@ public class BattleShip extends Ship
 					+ p.getName() + "]? (y/n): ");
 			String ys = in.nextLine();
 			if (ys.equalsIgnoreCase("y")) System.out.println(p.toString());
+			System.out.println("Battleship length: 4");
 			System.out.print("Enter row location for BattleShip: ");
 			int row = in.nextInt();
 			System.out.print("Enter column location for BattleShip: ");

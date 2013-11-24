@@ -18,6 +18,7 @@ public class AircraftCarrier extends Ship
 					+ p.getName() + "]? (y/n): ");
 			String ys = in.nextLine();
 			if (ys.equalsIgnoreCase("y")) System.out.println(p.toString());
+			System.out.println("Aircraft Carrier length: 5");
 			System.out.print("Enter row location for Aircraft Carrier: ");
 			int row = in.nextInt();
 			System.out.print("Enter column location for Aircraft Carrier: ");
