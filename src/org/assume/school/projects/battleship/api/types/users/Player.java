@@ -32,15 +32,15 @@ public class Player
 	    if (ship == null)
 		return;
 	    ship.onHit(row, col);
-	    this.board.onHit(row, col);
+	    this.getOpponent().getBoard().onHit(row, col);
 	    if (ship.isSunk())
 		System.out.println("Congratulations! You sunk "
 			+ this.opponent.getName() + "'s " + ship.toString());
 	} else
 	{
-	    System.out.println("Missed " + this.opponent.getName()
+	    System.out.println("Missed " + this.getOpponent().getName()
 		    + " at: row[" + row + "], col[" + col + "]");
-	    this.board.onMiss(row, col);
+	    this.getOpponent().getBoard().onMiss(row, col);
 	}
 
     }
@@ -64,6 +64,7 @@ public class Player
 	    } else
 	    {
 		System.out.println(code);
+		return false;
 	    }
 	} else
 	{
@@ -71,7 +72,6 @@ public class Player
 		    + s.getClass().getSimpleName() + "]");
 	    return false;
 	}
-	return false;
 
     }
 

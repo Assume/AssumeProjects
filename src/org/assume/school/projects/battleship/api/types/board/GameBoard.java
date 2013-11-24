@@ -60,7 +60,7 @@ public class GameBoard implements Playable
     {
 	for (Ship s : attackee.getShips())
 	{
-	    if (s.doesPegHit(row, col, this))
+	    if (s.doesPegHit(row, col, attackee.getBoard()))
 		return true;
 	}
 	return false;

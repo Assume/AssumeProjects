@@ -158,20 +158,10 @@ public class Ship implements Hittable
     {
 	if (this.getOrientation() == Ship.VERTICAL)
 	{
-	    for (int i = this.row; i < this.row + this.size; i++)
-	    {
-		if (i == row)
-		    return true;
-	    }
+	    return row <= this.row && row >= (this.row + this.size) && this.col == col;
 	} else if (this.getOrientation() == Ship.HORIZONTAL)
 	{
-	    if (this.row != row)
-		return false;
-	    for (int i = this.col; i < this.col + this.size; i++)
-	    {
-		if (i == col)
-		    return true;
-	    }
+	    return row == this.row && col <= (this.col + this.size) && col >= this.col;
 	}
 	return false;
     }
