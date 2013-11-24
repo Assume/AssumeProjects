@@ -2,7 +2,7 @@ package org.assume.school.projects.battleship.main;
 
 import java.util.Scanner;
 
-import org.assume.school.projects.battleship.api.types.command.MoveCommand;
+import org.assume.school.projects.battleship.api.types.command.commands.MoveCommand;
 import org.assume.school.projects.battleship.api.types.ships.bottom.AircraftCarrier;
 import org.assume.school.projects.battleship.api.types.ships.bottom.BattleShip;
 import org.assume.school.projects.battleship.api.types.ships.bottom.Cruiser;
@@ -44,9 +44,7 @@ public class Game
 	public void setup()
 	{
 		this.setupPlayer(this.getOne());
-		this.getOne().executeCommand(
-				new MoveCommand(MoveCommand.UP,
-						this.getOne().getShips().get(0), this.getOne()));
+		this.getOne().executeCommand(MoveCommand.createInstance(this.getOne()));
 		System.out.println(this.getOne());
 		// this.setupPlayer(this.getTwo());
 	}
@@ -61,8 +59,8 @@ public class Game
 		AircraftCarrier.createInstance(p);
 		BattleShip.createInstance(p);
 		Cruiser.createInstance(p);
-		Destroyer.createInstance(p);
 		Submarine.createInstance(p);
+		Destroyer.createInstance(p);
 	}
 
 	public Player getOne()

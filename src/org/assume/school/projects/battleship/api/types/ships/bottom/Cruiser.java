@@ -23,7 +23,7 @@ public class Cruiser extends Ship
 			System.out.print("Enter column location for Cruiser: ");
 			int col = in.nextInt();
 			System.out
-					.print("Enter orientation (1 for horizontal, 2 for vertical)");
+					.print("Enter orientation (1 for horizontal, 2 for vertical): ");
 			int or = in.nextInt();
 			if (p.addShip(new Cruiser(3, row, col, or, ShipState.ALIVE)))
 				return;
