@@ -12,10 +12,8 @@ public class MatrixAdd extends MatrixExecutor {
 		if (!x.size().equals(y.size()))
 			return null;
 		Point size = x.size();
-		Matrix an = new Matrix(size.x, size.y, super.x.name() + " plus "
-				+ super.y.name());
-		MatrixWork work = new MatrixWork(size.x, size.y, super.x.name()
-				+ " plus " + super.y.name());
+		Matrix an = new Matrix(size.x, size.y, super.x.name() + " plus " + super.y.name());
+		MatrixWork work = new MatrixWork(size.x, size.y, super.x.name() + " plus " + super.y.name());
 		for (int i = 0; i < size.x; i++)
 			for (int j = 0; j < size.y; j++) {
 				an.set(i, j, this.x.get(i, j) + this.y.get(i, j));

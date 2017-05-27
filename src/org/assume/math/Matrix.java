@@ -71,8 +71,7 @@ public class Matrix {
 			if (this.matrix[i][col] > largest)
 				largest = matrix[i][col];
 		}
-		System.out.println("largest: " + largest + " , "
-				+ Integer.toString(largest).length());
+		System.out.println("largest: " + largest + " , " + Integer.toString(largest).length());
 		return Integer.toString(largest).length();
 	}
 

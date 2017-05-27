@@ -1,6 +1,5 @@
 package org.assume.ScriptInformation.GUI;
 
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -26,9 +25,9 @@ import javax.swing.event.ListSelectionListener;
 
 import org.assume.ScriptInformation.GUI.handlers.GUIHandler;
 import org.assume.ScriptInformation.client.Database;
+
 @SuppressWarnings("rawtypes")
-public class GUI extends JFrame
-{
+public class GUI extends JFrame {
 
 	private static final long serialVersionUID = -6662234732912027441L;
 	private JPanel contentPane;
@@ -38,45 +37,31 @@ public class GUI extends JFrame
 	public static DefaultListModel<String> modelScripts = new DefaultListModel<String>();
 	public static DefaultListModel<String> modelInfo = new DefaultListModel<String>();
 	private final GUIHandler handler = new GUIHandler();
+
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable()
-		{
-			public void run()
-			{
-				try
-				{
-					GUI frame = new GUI();
-					frame.setVisible(true);
-				} catch (Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+	/*
+	 * public static void main(String[] args) { EventQueue.invokeLater(new
+	 * Runnable() { public void run() { try { GUI frame = new GUI();
+	 * frame.setVisible(true); } catch (Exception e) { e.printStackTrace(); } }
+	 * }); }
+	 */
 
-	private static void goTo()
-	{
-		
+	private static void goTo() {
+
 	}
-	
+
 	/**
 	 * Create the frame.
 	 */
 	@SuppressWarnings("unchecked")
-	public GUI()
-	{
-		
-		try
-		{
+	public GUI() {
+
+		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException | InstantiationException
-				| IllegalAccessException | UnsupportedLookAndFeelException e1)
-		{
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
@@ -102,9 +87,8 @@ public class GUI extends JFrame
 		contentPane.add(btnRemove);
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int index  = scriptList.getSelectedIndex();
-				if(index > -1)
-				{
+				int index = scriptList.getSelectedIndex();
+				if (index > -1) {
 					listOfUsers.remove(handler.getUsername(modelScripts.get(index)));
 					Database.map.remove(handler.getUsername(modelScripts.get(index)));
 					modelScripts.remove(index);
@@ -133,12 +117,11 @@ public class GUI extends JFrame
 		scriptList = new JList(modelScripts);
 		scrollPane_1.setViewportView(scriptList);
 		scriptList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scriptList.setFont(new Font("Arial",Font.BOLD,14));
+		scriptList.setFont(new Font("Arial", Font.BOLD, 14));
 		scriptList.setCellRenderer(new SelectedListCellRenderer());
-		scriptList.addListSelectionListener(new ListSelectionListener(){
+		scriptList.addListSelectionListener(new ListSelectionListener() {
 			@Override
-			public void valueChanged(ListSelectionEvent e)
-			{
+			public void valueChanged(ListSelectionEvent e) {
 				handler.refresh();
 			}
 		});
@@ -150,28 +133,21 @@ public class GUI extends JFrame
 		scriptInformationList = new JList(modelInfo);
 		scrollPane.setViewportView(scriptInformationList);
 		scriptInformationList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scriptInformationList.setFont(new Font("Arial",Font.BOLD,11));
+		scriptInformationList.setFont(new Font("Arial", Font.BOLD, 11));
 	}
 }
 
-
 @SuppressWarnings("serial")
-class SelectedListCellRenderer extends DefaultListCellRenderer 
-{
+class SelectedListCellRenderer extends DefaultListCellRenderer {
 	@Override
-	public Component getListCellRendererComponent(@SuppressWarnings("rawtypes") JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
-	{
+	public Component getListCellRendererComponent(@SuppressWarnings("rawtypes") JList list, Object value, int index,
+			boolean isSelected, boolean cellHasFocus) {
 		Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-		if (value.toString().contains("Stopped")) 
-		{
+		if (value.toString().contains("Stopped")) {
 			c.setBackground(Color.RED);
-		}
-		else if(value.toString().contains("Paused"))
-		{
+		} else if (value.toString().contains("Paused")) {
 			c.setBackground(Color.ORANGE);
-		}
-		else if(value.toString().contains("Running"))
-		{
+		} else if (value.toString().contains("Running")) {
 			c.setBackground(Color.GREEN);
 		}
 		return c;

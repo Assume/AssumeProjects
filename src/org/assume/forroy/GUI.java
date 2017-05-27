@@ -16,44 +16,33 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class GUI extends JFrame
-{
+public class GUI extends JFrame {
 
 	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable()
-		{
-			public void run()
-			{
-				try
-				{
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
 					GUI frame = new GUI();
 					frame.setVisible(true);
-				}
-				catch (Exception e)
-				{
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
 
-	public void addRectangle()
-	{
-		if (x < 500)
-		{
+	public void addRectangle() {
+		if (x < 500) {
 			Rectangle r = new Rectangle(x, y, 50, 50);
 			list.add(r);
 			x = y == 500 ? x + 50 : x;
 			y = y == 500 ? 0 : y + 50;
-		}
-		else
-		{
+		} else {
 			JOptionPane.showMessageDialog(null, "Maximum rectangles added");
 		}
 	}
@@ -63,8 +52,7 @@ public class GUI extends JFrame
 	private int y = 0;
 	boolean done;
 
-	public GUI()
-	{
+	public GUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		list = new ArrayList<Rectangle>();
@@ -73,10 +61,8 @@ public class GUI extends JFrame
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		JButton btnAddRectangle = new JButton("Add Rectangle");
-		btnAddRectangle.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
+		btnAddRectangle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				addRectangle();
 			}
 		});
@@ -87,42 +73,33 @@ public class GUI extends JFrame
 	}
 }
 
-class DrawCanvas extends JPanel
-{
+class DrawCanvas extends JPanel {
 
 	private List<Rectangle> list;
 	private int x;
 	private int y;
 
-	public DrawCanvas(List<Rectangle> list, int x, int y)
-	{
+	public DrawCanvas(List<Rectangle> list, int x, int y) {
 		this.list = list;
 		this.x = x;
 		this.y = y;
 	}
 
 	@Override
-	public void paintComponent(Graphics g)
-	{
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		repaint();
-		try
-		{
-			for (Rectangle r : list)
-			{
+		try {
+			for (Rectangle r : list) {
 				((Graphics2D) g).draw(r);
-				int x = new Random().nextInt(2) == 0 ? ((int) r.getCenterX() - new Random()
-						.nextInt(20)) : (int) r.getCenterX()
-						+ new Random().nextInt(20);
-				int y = new Random().nextInt(2) == 0 ? ((int) r.getCenterY() - new Random()
-						.nextInt(20)) * -1
+				int x = new Random().nextInt(2) == 0 ? ((int) r.getCenterX() - new Random().nextInt(20))
+						: (int) r.getCenterX() + new Random().nextInt(20);
+				int y = new Random().nextInt(2) == 0 ? ((int) r.getCenterY() - new Random().nextInt(20)) * -1
 						: (int) r.getCenterY() + new Random().nextInt(20);
 				((Graphics2D) g).drawOval(x, y, 15, 15);
 			}
 			Thread.sleep(75);
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 
 		}
 

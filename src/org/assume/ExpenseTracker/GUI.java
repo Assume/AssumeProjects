@@ -1,39 +1,34 @@
 package org.assume.ExpenseTracker;
 
-import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import org.assume.api.types.Category;
 import org.assume.api.types.Date;
 import org.assume.api.types.Month;
 import org.assume.api.types.Purchase;
 
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.Font;
-import java.io.IOException;
-
-public class GUI extends JFrame
-{
+public class GUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField priceField;
@@ -47,32 +42,25 @@ public class GUI extends JFrame
 	private JTextField searchNameField;
 	private JTextField lowTextField;
 	private JTextField highTextField;
-	static void updateList()
-	{
-		for(int i = 0; i < Tracker.list.size(); i++)
-		{
+
+	static void updateList() {
+		for (int i = 0; i < Tracker.list.size(); i++) {
 			MODEL_PURCHASE.addElement(Tracker.list.get(i).toString());
 		}
 	}
 
-	Category getCategoryFromString(String s)
-	{
-		for(int i = 0; i < Tracker.categoryList.size(); i++)
-		{
-			if(Tracker.categoryList.get(i).toString().equals(s))
-			{
+	Category getCategoryFromString(String s) {
+		for (int i = 0; i < Tracker.categoryList.size(); i++) {
+			if (Tracker.categoryList.get(i).toString().equals(s)) {
 				return Tracker.categoryList.get(i);
 			}
 		}
 		return null;
 	}
 
-	Month getMonthFromString(String s)
-	{
-		for(Month m : Month.values())
-		{
-			if(m.toString().equals(s))
-			{
+	Month getMonthFromString(String s) {
+		for (Month m : Month.values()) {
+			if (m.toString().equals(s)) {
 
 				return m;
 			}
@@ -82,16 +70,15 @@ public class GUI extends JFrame
 	/**
 	 * Launch the application.
 	 */
-	//public static void main(String[] args)
-	//{
+	// public static void main(String[] args)
+	// {
 
-	//}
+	// }
 
 	/**
 	 * Create the frame.
 	 */
-	public GUI()
-	{
+	public GUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 868, 551);
 		contentPane = new JPanel();
@@ -102,25 +89,26 @@ public class GUI extends JFrame
 		JButton btnAddPurchase = new JButton("路径点列表");
 		btnAddPurchase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Purchase d = new Purchase(Double.parseDouble(priceField.getText()), 
-						nameField.getText(), 
+				Purchase d = new Purchase(Double.parseDouble(priceField.getText()), nameField.getText(),
 						new Date(Integer.parseInt(yearComboBox.getSelectedItem().toString()),
-								getMonthFromString(monthComboBox.getSelectedItem().toString()).getMonth(), 
+								getMonthFromString(monthComboBox.getSelectedItem().toString()).getMonth(),
 								Integer.parseInt(dayComboBox.getSelectedItem().toString())),
-								new Category(categoryBox.getSelectedItem().toString())
-						);
+						new Category(categoryBox.getSelectedItem().toString()));
 				Tracker.addNewPurchase(d);
 
 				double temp = Tracker.totalMap.get(d.getCategory().toString());
 				Tracker.totalMap.remove(d.getCategory().toString());
-				//Tracker.totalMap.put(d.getCategory().toString(), (temp + Tracker.list.get(Tracker.list.indexOf(d)).getPrice()));
+				// Tracker.totalMap.put(d.getCategory().toString(), (temp +
+				// Tracker.list.get(Tracker.list.indexOf(d)).getPrice()));
 
-				System.out.println(d.getCategory().toString()+"Hi");
-				//System.out.println(Tracker.totalMap.get(d.getCategory()));
-				//double temp = Tracker.totalMap.get(d.getCategory());
+				System.out.println(d.getCategory().toString() + "Hi");
+				// System.out.println(Tracker.totalMap.get(d.getCategory()));
+				// double temp = Tracker.totalMap.get(d.getCategory());
 				Tracker.totalMap.remove(d.getCategory());
-				//System.out.println("Hi "+(temp + Tracker.list.get(Tracker.list.indexOf(d)).getPrice()));
-				//Tracker.totalMap.put(d.getCategory(), (temp + Tracker.list.get(Tracker.list.indexOf(d)).getPrice()));
+				// System.out.println("Hi "+(temp +
+				// Tracker.list.get(Tracker.list.indexOf(d)).getPrice()));
+				// Tracker.totalMap.put(d.getCategory(), (temp +
+				// Tracker.list.get(Tracker.list.indexOf(d)).getPrice()));
 
 				MODEL_PURCHASE.addElement(Tracker.list.get(Tracker.list.indexOf(d)).toString());
 			}
@@ -136,8 +124,7 @@ public class GUI extends JFrame
 		monthComboBox.setBounds(150, 442, 136, 20);
 		contentPane.add(monthComboBox);
 
-		for(Month m : Month.values())
-		{
+		for (Month m : Month.values()) {
 			MODEL_MONTH.addElement(m.toString());
 		}
 
@@ -145,9 +132,7 @@ public class GUI extends JFrame
 		categoryBox.setBounds(442, 442, 120, 20);
 		contentPane.add(categoryBox);
 
-
-		for(Category b : Tracker.categoryList.toArray(new Category[Tracker.categoryList.size()]))
-		{
+		for (Category b : Tracker.categoryList.toArray(new Category[Tracker.categoryList.size()])) {
 			MODEL_CATEGORY.addElement(b.toString());
 		}
 
@@ -158,8 +143,7 @@ public class GUI extends JFrame
 		yearComboBox = new JComboBox(MODEL_YEAR);
 		yearComboBox.setBounds(20, 442, 120, 20);
 		contentPane.add(yearComboBox);
-		for(int i = 1970 ; i <= 2013; i++)
-		{
+		for (int i = 1970; i <= 2013; i++) {
 			MODEL_YEAR.addElement(i);
 		}
 		MODEL_YEAR.setSelectedItem(2013);
@@ -167,38 +151,29 @@ public class GUI extends JFrame
 		dayComboBox = new JComboBox(MODEL_DAY);
 		dayComboBox.setBounds(296, 442, 136, 20);
 		contentPane.add(dayComboBox);
-		for(int i = 1; i <= Month.JANUARY.getDays(); i++)
-		{
+		for (int i = 1; i <= Month.JANUARY.getDays(); i++) {
 			MODEL_DAY.addElement(i);
 		}
-		monthComboBox.addItemListener(new ItemListener()
-		{
+		monthComboBox.addItemListener(new ItemListener() {
 			@Override
-			public void itemStateChanged(ItemEvent arg0)
-			{
-				if(arg0.getStateChange() == arg0.SELECTED)
-				{
+			public void itemStateChanged(ItemEvent arg0) {
+				if (arg0.getStateChange() == arg0.SELECTED) {
 					MODEL_DAY.removeAllElements();
 					Month d = null;
-					for(Month m : Month.values())
-					{
-						if(m.toString().equals(MODEL_MONTH.getSelectedItem().toString()))
-						{
+					for (Month m : Month.values()) {
+						if (m.toString().equals(MODEL_MONTH.getSelectedItem().toString())) {
 							d = m;
 							break;
 						}
 					}
-					if(d != null)
-					{
-						for(int i = 1; i <= d.getDays(); i++)
-						{
+					if (d != null) {
+						for (int i = 1; i <= d.getDays(); i++) {
 							MODEL_DAY.addElement(i);
 						}
 					}
-				}	
+				}
 			}
 		});
-
 
 		JLabel lblDay = new JLabel("Day");
 		lblDay.setBounds(296, 417, 46, 14);
@@ -234,7 +209,6 @@ public class GUI extends JFrame
 		searchLabel.setBounds(538, 11, 73, 14);
 		contentPane.add(searchLabel);
 
-
 		searchNameField = new JTextField();
 		searchNameField.setBounds(558, 36, 86, 20);
 		contentPane.add(searchNameField);
@@ -267,7 +241,6 @@ public class GUI extends JFrame
 		lblLow.setBounds(482, 125, 46, 14);
 		contentPane.add(lblLow);
 
-
 		JLabel lblCategory = new JLabel("Category");
 		lblCategory.setBounds(442, 417, 67, 14);
 		contentPane.add(lblCategory);
@@ -275,11 +248,9 @@ public class GUI extends JFrame
 		JButton expenseButton = new JButton("Generate expense report");
 		expenseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try
-				{
+				try {
 					FileIO.output();
-				} catch (IOException e)
-				{
+				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -287,43 +258,34 @@ public class GUI extends JFrame
 		});
 		expenseButton.setBounds(10, 478, 174, 23);
 		contentPane.add(expenseButton);
-		lowTextField.addKeyListener(new KeyAdapter()
-		{
-			public void keyTyped(KeyEvent ke)
-			{
-				if(lowTextField.getText().equals("") && highTextField.getText().equals("") && priceField.getText().equals(""))
-				{
+		lowTextField.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent ke) {
+				if (lowTextField.getText().equals("") && highTextField.getText().equals("")
+						&& priceField.getText().equals("")) {
 					MODEL_PURCHASE.clear();
-					for(int r = 0; r < Tracker.list.size(); r++)
-					{
+					for (int r = 0; r < Tracker.list.size(); r++) {
 						MODEL_PURCHASE.addElement(Tracker.list.get(r).toString());
 					}
 				}
 			}
 		});
-		highTextField.addKeyListener(new KeyAdapter()
-		{
-			public void keyTyped(KeyEvent ke)
-			{
-				if(lowTextField.getText().equals("") && highTextField.getText().equals("") && priceField.getText().equals(""))
-				{
+		highTextField.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent ke) {
+				if (lowTextField.getText().equals("") && highTextField.getText().equals("")
+						&& priceField.getText().equals("")) {
 					MODEL_PURCHASE.clear();
-					for(int r = 0; r < Tracker.list.size(); r++)
-					{
+					for (int r = 0; r < Tracker.list.size(); r++) {
 						MODEL_PURCHASE.addElement(Tracker.list.get(r).toString());
 					}
 				}
 			}
 		});
-		priceField.addKeyListener(new KeyAdapter()
-		{
-			public void keyTyped(KeyEvent ke)
-			{
-				if(lowTextField.getText().equals("") && highTextField.getText().equals("") && priceField.getText().equals(""))
-				{
+		priceField.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent ke) {
+				if (lowTextField.getText().equals("") && highTextField.getText().equals("")
+						&& priceField.getText().equals("")) {
 					MODEL_PURCHASE.clear();
-					for(int r = 0; r < Tracker.list.size(); r++)
-					{
+					for (int r = 0; r < Tracker.list.size(); r++) {
 						MODEL_PURCHASE.addElement(Tracker.list.get(r).toString());
 					}
 				}
@@ -333,55 +295,44 @@ public class GUI extends JFrame
 			public void changedUpdate(DocumentEvent e) {
 				updateL();
 			}
+
 			public void removeUpdate(DocumentEvent e) {
 				updateL();
 			}
+
 			public void insertUpdate(DocumentEvent e) {
 				updateL();
 			}
 
 			public void updateL() {
 				MODEL_PURCHASE.clear();
-				if(lowTextField.getText().equals("") && highTextField.getText().equals("") && priceField.getText().equals(""))
-				{
+				if (lowTextField.getText().equals("") && highTextField.getText().equals("")
+						&& priceField.getText().equals("")) {
 					MODEL_PURCHASE.clear();
-					for(int r = 0; r < Tracker.list.size(); r++)
-					{
+					for (int r = 0; r < Tracker.list.size(); r++) {
 						MODEL_PURCHASE.addElement(Tracker.list.get(r).toString());
 					}
-				}
-				else
-				{
+				} else {
 					MODEL_PURCHASE.clear();
-					for(int i = 0; i < Tracker.list.size(); i++)
-					{
-						if(!highTextField.getText().equals("") && !searchNameField.getText().equals(""))
-						{
-							if(Tracker.list.get(i).getPrice() <= Double.parseDouble(highTextField.getText())
+					for (int i = 0; i < Tracker.list.size(); i++) {
+						if (!highTextField.getText().equals("") && !searchNameField.getText().equals("")) {
+							if (Tracker.list.get(i).getPrice() <= Double.parseDouble(highTextField.getText())
 									&& Tracker.list.get(i).getPrice() >= Double.parseDouble(lowTextField.getText())
-									&& Tracker.list.get(i).getItem().contains(searchNameField.getText()))
-							{
+									&& Tracker.list.get(i).getItem().contains(searchNameField.getText())) {
 								MODEL_PURCHASE.addElement(Tracker.list.get(i).toString());
 							}
-						}
-						else if(!highTextField.getText().equals("") && !lowTextField.getText().equals(""))
-						{
-							if(Tracker.list.get(i).getPrice() <= Double.parseDouble(highTextField.getText())
-									&& Tracker.list.get(i).getPrice() >= Double.parseDouble(lowTextField.getText()))
-							{
+						} else if (!highTextField.getText().equals("") && !lowTextField.getText().equals("")) {
+							if (Tracker.list.get(i).getPrice() <= Double.parseDouble(highTextField.getText())
+									&& Tracker.list.get(i).getPrice() >= Double.parseDouble(lowTextField.getText())) {
 								MODEL_PURCHASE.addElement(Tracker.list.get(i).toString());
 							}
-						}
-						else if(!searchNameField.getText().equals("") && !lowTextField.getText().equals(""))
-						{
-							if(Tracker.list.get(i).getPrice() <= Double.parseDouble(highTextField.getText())
-									&& Tracker.list.get(i).getItem().contains(searchNameField.getText()))
-							{
+						} else if (!searchNameField.getText().equals("") && !lowTextField.getText().equals("")) {
+							if (Tracker.list.get(i).getPrice() <= Double.parseDouble(highTextField.getText())
+									&& Tracker.list.get(i).getItem().contains(searchNameField.getText())) {
 								MODEL_PURCHASE.addElement(Tracker.list.get(i).toString());
 							}
-						}
-						else if(!lowTextField.getText().equals("") && Tracker.list.get(i).getPrice() >= Double.parseDouble(lowTextField.getText()))
-						{
+						} else if (!lowTextField.getText().equals("")
+								&& Tracker.list.get(i).getPrice() >= Double.parseDouble(lowTextField.getText())) {
 							MODEL_PURCHASE.addElement(Tracker.list.get(i).toString());
 						}
 					}
@@ -393,55 +344,45 @@ public class GUI extends JFrame
 			public void changedUpdate(DocumentEvent e) {
 				updateH();
 			}
+
 			public void removeUpdate(DocumentEvent e) {
 				updateH();
 			}
+
 			public void insertUpdate(DocumentEvent e) {
 				updateH();
 			}
 
 			public void updateH() {
 				MODEL_PURCHASE.clear();
-				if(lowTextField.getText().equals("") && highTextField.getText().equals("") && priceField.getText().equals(""))
-				{
+				if (lowTextField.getText().equals("") && highTextField.getText().equals("")
+						&& priceField.getText().equals("")) {
 					MODEL_PURCHASE.clear();
-					for(int r = 0; r < Tracker.list.size(); r++)
-					{
+					for (int r = 0; r < Tracker.list.size(); r++) {
 						MODEL_PURCHASE.addElement(Tracker.list.get(r).toString());
 					}
-				}
-				else
-				{
+				} else {
 					MODEL_PURCHASE.clear();
-					for(int i = 0; i < Tracker.list.size(); i++)
-					{
-						if(!lowTextField.getText().equals("") && !searchNameField.getText().equals(""))
-						{
-							if(Tracker.list.get(i).getPrice() <= Double.parseDouble(highTextField.getText())
+					for (int i = 0; i < Tracker.list.size(); i++) {
+						if (!lowTextField.getText().equals("") && !searchNameField.getText().equals("")) {
+							if (Tracker.list.get(i).getPrice() <= Double.parseDouble(highTextField.getText())
 									&& Tracker.list.get(i).getPrice() >= Double.parseDouble(lowTextField.getText())
-									&& Tracker.list.get(i).getItem().contains(searchNameField.getText()))
-							{
+									&& Tracker.list.get(i).getItem().contains(searchNameField.getText())) {
 								MODEL_PURCHASE.addElement(Tracker.list.get(i).toString());
 							}
-						}
-						else if(!lowTextField.getText().equals("") && !highTextField.getText().equals(""))
-						{
-							if(Tracker.list.get(i).getPrice() <= Double.parseDouble(highTextField.getText())
-									&& Tracker.list.get(i).getPrice() >= Double.parseDouble(lowTextField.getText()))
-							{
+						} else if (!lowTextField.getText().equals("") && !highTextField.getText().equals("")) {
+							if (Tracker.list.get(i).getPrice() <= Double.parseDouble(highTextField.getText())
+									&& Tracker.list.get(i).getPrice() >= Double.parseDouble(lowTextField.getText())) {
 								MODEL_PURCHASE.addElement(Tracker.list.get(i).toString());
 							}
-						}
-						else if(!searchNameField.getText().equals(""))
-						{
-							if(Tracker.list.get(i).getPrice() <= Double.parseDouble(highTextField.getText())
-									&& Tracker.list.get(i).getItem().contains(searchNameField.getText()))
-							{
+						} else if (!searchNameField.getText().equals("")) {
+							if (Tracker.list.get(i).getPrice() <= Double.parseDouble(highTextField.getText())
+									&& Tracker.list.get(i).getItem().contains(searchNameField.getText())) {
 								MODEL_PURCHASE.addElement(Tracker.list.get(i).toString());
 							}
-						}
-						else if(!highTextField.getText().equals("") && Tracker.list.get(i).getPrice() <= Double.parseDouble(highTextField.getText()) && lowTextField.getText().equals(""))
-						{
+						} else if (!highTextField.getText().equals("")
+								&& Tracker.list.get(i).getPrice() <= Double.parseDouble(highTextField.getText())
+								&& lowTextField.getText().equals("")) {
 							MODEL_PURCHASE.addElement(Tracker.list.get(i).toString());
 						}
 					}
@@ -453,71 +394,68 @@ public class GUI extends JFrame
 			public void changedUpdate(DocumentEvent e) {
 				updateN();
 			}
+
 			public void removeUpdate(DocumentEvent e) {
 				updateN();
 			}
+
 			public void insertUpdate(DocumentEvent e) {
 				updateN();
 			}
 
 			public void updateN() {
-				if(lowTextField.getText().equals("") && highTextField.getText().equals("") && priceField.getText().equals(""))
-				{
+				if (lowTextField.getText().equals("") && highTextField.getText().equals("")
+						&& priceField.getText().equals("")) {
 
 					MODEL_PURCHASE.clear();
-					for(int r = 0; r < Tracker.list.size(); r++)
+					for (int r = 0; r < Tracker.list.size(); r++)
 
-						/*if(!lowTextField.getText().equals("") && !highTextField.getText().equals(""))
-					{
-						MODEL_PURCHASE.addElement(Tracker.list.get(r).toString());
-					}
-				}
-				else 
-				{
-					MODEL_PURCHASE.clear();
-					for(int i = 0; i < Tracker.list.size(); i++)
-					{
-						if(!lowTextField.getText().equals("") && !highTextField.getText().equals(""))
-						{
-							if(Tracker.list.get(i).getPrice() <= Double.parseDouble(highTextField.getText())
-									&& Tracker.list.get(i).getPrice() >= Double.parseDouble(lowTextField.getText())
-									&& Tracker.list.get(i).getItem().contains(searchNameField.getText()))
-							{
-								MODEL_PURCHASE.addElement(Tracker.list.get(i).toString());
-							}
-						}
-						else if(!lowTextField.getText().equals(""))
-						{
-							if(Tracker.list.get(i).getPrice() <= Double.parseDouble(highTextField.getText())
-									&& Tracker.list.get(i).getPrice() >= Double.parseDouble(lowTextField.getText()))
-							{
-								MODEL_PURCHASE.addElement(Tracker.list.get(i).toString());
-							}
-						}
-
-						else if(!highTextField.getText().equals(""))
-						{
-							if(Tracker.list.get(i).getPrice() <= Double.parseDouble(highTextField.getText())
-									&& Tracker.list.get(i).getItem().contains(searchNameField.getText()))
-							{
-								MODEL_PURCHASE.addElement(Tracker.list.get(i).toString());
-							}
-						}
-						else if(Tracker.list.get(i).getItem().contains(searchNameField.getText()))
-
-					}
-					else if(Tracker.list.get(i).getItem().contains(searchNameField.getText()))
-					{
-						MODEL_PURCHASE.addElement(Tracker.list.get(i).toString());
-					}*/
-						//	else 
-						//{
+						/*
+						 * if(!lowTextField.getText().equals("") &&
+						 * !highTextField.getText().equals("")) {
+						 * MODEL_PURCHASE.addElement(Tracker.list.get(r).
+						 * toString()); } } else { MODEL_PURCHASE.clear();
+						 * for(int i = 0; i < Tracker.list.size(); i++) {
+						 * if(!lowTextField.getText().equals("") &&
+						 * !highTextField.getText().equals("")) {
+						 * if(Tracker.list.get(i).getPrice() <=
+						 * Double.parseDouble(highTextField.getText()) &&
+						 * Tracker.list.get(i).getPrice() >=
+						 * Double.parseDouble(lowTextField.getText()) &&
+						 * Tracker.list.get(i).getItem().contains(
+						 * searchNameField.getText())) {
+						 * MODEL_PURCHASE.addElement(Tracker.list.get(i).
+						 * toString()); } } else
+						 * if(!lowTextField.getText().equals("")) {
+						 * if(Tracker.list.get(i).getPrice() <=
+						 * Double.parseDouble(highTextField.getText()) &&
+						 * Tracker.list.get(i).getPrice() >=
+						 * Double.parseDouble(lowTextField.getText())) {
+						 * MODEL_PURCHASE.addElement(Tracker.list.get(i).
+						 * toString()); } }
+						 * 
+						 * else if(!highTextField.getText().equals("")) {
+						 * if(Tracker.list.get(i).getPrice() <=
+						 * Double.parseDouble(highTextField.getText()) &&
+						 * Tracker.list.get(i).getItem().contains(
+						 * searchNameField.getText())) {
+						 * MODEL_PURCHASE.addElement(Tracker.list.get(i).
+						 * toString()); } } else
+						 * if(Tracker.list.get(i).getItem().contains(
+						 * searchNameField.getText()))
+						 * 
+						 * } else if(Tracker.list.get(i).getItem().contains(
+						 * searchNameField.getText())) {
+						 * MODEL_PURCHASE.addElement(Tracker.list.get(i).
+						 * toString()); }
+						 */
+						// else
+						// {
 						MODEL_PURCHASE.clear();
-					for(int d = 0; d < Tracker.list.size(); d++)
-					{
+					for (int d = 0; d < Tracker.list.size(); d++) {
 						MODEL_PURCHASE.addElement(Tracker.list.get(d).toString());
 					}
-					//}
+					// }
 				}
 			}
 		});

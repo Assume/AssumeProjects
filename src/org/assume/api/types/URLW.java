@@ -44,8 +44,8 @@ public class URLW
 					connection = this.getUrl().openConnection();
 					in = connection.getInputStream();
 					byte[] buffer = new byte[1024];
-					int read;
-					while ((read = in.read(buffer)) != -1)
+			int read;
+			while ((read = in.read(buffer)) != -1)
 					{
 						out.write(buffer, 0, read);
 					}

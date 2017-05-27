@@ -7,8 +7,7 @@ public class MatrixAnswer {
 	private Matrix fin;
 	private MatrixWork work;
 
-	public MatrixAnswer(Matrix fin, MatrixWork work, Matrix original_one,
-			Matrix original_two) {
+	public MatrixAnswer(Matrix fin, MatrixWork work, Matrix original_one, Matrix original_two) {
 		this.fin = fin;
 		this.work = work;
 		this.original_one = original_one;
@@ -20,10 +19,8 @@ public class MatrixAnswer {
 	}
 
 	public String print() {
-		return original_one.name() + ": \n" + this.original_one.print() + "\n\n"
-				+ original_two.name() + ":\n" + original_two.print()
-				+ "\n\nAnswer: \n" + this.fin.print() + "\n\nWork: \n"
-				+ this.work.print();
+		return original_one.name() + ": \n" + this.original_one.print() + "\n\n" + original_two.name() + ":\n"
+				+ original_two.print() + "\n\nAnswer: \n" + this.fin.print() + "\n\nWork: \n" + this.work.print();
 	}
 
 	@Override

@@ -83,20 +83,17 @@ public class GUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		final JComboBox<Matrix> matrix_one_combo = new JComboBox<Matrix>(
-				getMatrices());
+		final JComboBox<Matrix> matrix_one_combo = new JComboBox<Matrix>(getMatrices());
 		matrix_one_combo.setBounds(6, 71, 132, 27);
 		contentPane.add(matrix_one_combo);
 		matrix_one_combo.setModel(this.matrix_model_one);
 
-		final JComboBox<Matrix> matrix_two_combo = new JComboBox<Matrix>(
-				getMatrices());
+		final JComboBox<Matrix> matrix_two_combo = new JComboBox<Matrix>(getMatrices());
 		matrix_two_combo.setBounds(150, 71, 132, 27);
 		contentPane.add(matrix_two_combo);
 		matrix_two_combo.setModel(this.matrix_model_two);
 
-		final JComboBox<ExecuteType> execute_type = new JComboBox<ExecuteType>(
-				ExecuteType.values());
+		final JComboBox<ExecuteType> execute_type = new JComboBox<ExecuteType>(ExecuteType.values());
 
 		JButton btnNewMatrix = new JButton("New Matrix");
 		btnNewMatrix.addActionListener(new ActionListener() {
@@ -114,13 +111,10 @@ public class GUI extends JFrame {
 				Matrix two = (Matrix) matrix_two_combo.getSelectedItem();
 				if (one == null || two == null)
 					return;
-				MatrixAnswer x = ((ExecuteType) execute_type.getSelectedItem())
-						.execute(one, two);
+				MatrixAnswer x = ((ExecuteType) execute_type.getSelectedItem()).execute(one, two);
 				if (x == null) {
-					JOptionPane
-							.showMessageDialog(
-									null,
-									"You cannot do that operation on these two matrices. Check to make sure they are compatible!");
+					JOptionPane.showMessageDialog(null,
+							"You cannot do that operation on these two matrices. Check to make sure they are compatible!");
 				} else {
 					if (!answers.contains(x)) {
 						answers.add(x);
@@ -143,8 +137,7 @@ public class GUI extends JFrame {
 		JButton matrix_edit_remove_button = new JButton("Print");
 		matrix_edit_remove_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MatrixAnswer an = (MatrixAnswer) matrix_edit_box
-						.getSelectedItem();
+				MatrixAnswer an = (MatrixAnswer) matrix_edit_box.getSelectedItem();
 				if (an == null)
 					return;
 				new PrintGUI().print(an);

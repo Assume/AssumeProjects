@@ -7,11 +7,9 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class ClientTest
-{
-	
-	public static void main(String[] args) throws UnknownHostException, IOException
-	{
+public class ClientTest {
+
+	public static void main(String[] args) throws UnknownHostException, IOException {
 		Socket s = new Socket("localhost", 1604);
 		OutputStreamWriter out = new OutputStreamWriter(s.getOutputStream());
 		out.write("Adam");

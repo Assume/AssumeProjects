@@ -7,39 +7,31 @@ import java.net.Socket;
 
 import org.assume.ScriptMakerRepo.backend.UploadManager.UploadHandler;
 
-public class ConnectionHandler implements Runnable
-{
+public class ConnectionHandler implements Runnable {
 
 	private Socket sock;
-	
-	public ConnectionHandler(Socket sock)
-	{
+
+	public ConnectionHandler(Socket sock) {
 		this.sock = sock;
-		
+
 	}
-	
+
 	@Override
-	public void run()
-	{
+	public void run() {
 		String command;
-		if(sock.isConnected())
-		{
-			try
-			{
+		if (sock.isConnected()) {
+			try {
 				command = new BufferedReader(new InputStreamReader(sock.getInputStream())).readLine();
-				if(command.contains("upload"))
-				{
+				if (command.contains("upload")) {
 					sock.setKeepAlive(true);
 					new Thread(new UploadHandler(sock)).start();
 				}
-			}
-			catch (IOException e)
-			{
+			} catch (IOException e) {
 				e.printStackTrace();
 				return;
 			}
 		}
-		
+
 	}
 
 }

@@ -52,18 +52,22 @@ public class Game {
 			System.out.println("I don't know what you mean...");
 			return false;
 		}
-		
+
 		String commandWord = command.getCommandWord();
-		if ( commandWord.equals("help")) { printHelp();} 
-		else if (commandWord.equals("go")) {goRoom(command);}
-		else if (commandWord.equals("quit")) {
-			if (command.hasSecondWord()) {System.out.println("Quit what?");
+		if (commandWord.equals("help")) {
+			printHelp();
+		} else if (commandWord.equals("go")) {
+			goRoom(command);
+		} else if (commandWord.equals("quit")) {
+			if (command.hasSecondWord()) {
+				System.out.println("Quit what?");
+			} else {
+				return true;
 			}
-			else {return true;}
-			}
-		return false;
 		}
-	
+		return false;
+	}
+
 	private void printHelp() {
 		System.out.println("You are lost. You are alone. You wander");
 		System.out.println("around at Monash Uni, Peninsula Campus.");
@@ -71,24 +75,24 @@ public class Game {
 		System.out.println("Your command words are:");
 		_parser.showCommands();
 	}
-	
+
 	private void goRoom(Command command) {
 		if (!command.hasSecondWord()) {
 			System.out.println("Go where?");
-			return ;
+			return;
 		}
 		String direction = command.getSecondWord();
-		
+
 		Room nextRoom = _currentRoom.nextRoom(direction);
-		
+
 		if (nextRoom == null) {
 			System.out.println("There is no door!");
-		}
-		else {
+		} else {
 			_currentRoom = nextRoom;
 			System.out.println(_currentRoom.longDescription());
 		}
 	}
+
 	public static void main(String[] args) {
 		Game game = new Game();
 		game.play();

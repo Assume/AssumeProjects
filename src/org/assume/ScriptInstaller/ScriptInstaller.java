@@ -18,54 +18,35 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
-public class ScriptInstaller
-{
-	public static void main(String[] args) throws ZipException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException, HeadlessException, IOException
-	{
+public class ScriptInstaller {
+	public static void main(String[] args) throws ZipException, UnsupportedLookAndFeelException, ClassNotFoundException,
+			InstantiationException, IllegalAccessException, HeadlessException, IOException {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		final JFileChooser fc = new JFileChooser();
 		ZipFile zip = null;
-		fc.setFileFilter(new FileNameExtensionFilter("zip","zip"));
+		fc.setFileFilter(new FileNameExtensionFilter("zip", "zip"));
 		fc.setAcceptAllFileFilterUsed(false);
-		//System.out.println(System.getProperty("os.name"));
+		// System.out.println(System.getProperty("os.name"));
 		String location = null;
-		
-		if(fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
-		{
+
+		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			zip = new ZipFile(fc.getSelectedFile());
 		}
-		
-		location = System.getProperty("user.home")+
-				File.separator+
-				"AppData"+
-				File.separator+
-				"Roaming"+
-				File.separator+
-				".tribot"+
-				File.separator+
-				"bin"+
-				File.separator+"script.zip";
 
-		if(zip != null && location != null)
-		{
-			/*zip.extractAll(System.getProperty("user.home")+
-					File.separator+
-					"AppData"+
-					File.separator+
-					"Roaming"+
-					File.separator+
-					".tribot"+
-					File.separator+
-					"bin"+
-					File.separator+
-					"scripts");*/
+		location = System.getProperty("user.home") + File.separator + "AppData" + File.separator + "Roaming"
+				+ File.separator + ".tribot" + File.separator + "bin" + File.separator + "script.zip";
+
+		if (zip != null && location != null) {
+			/*
+			 * zip.extractAll(System.getProperty("user.home")+ File.separator+
+			 * "AppData"+ File.separator+ "Roaming"+ File.separator+ ".tribot"+
+			 * File.separator+ "bin"+ File.separator+ "scripts");
+			 */
 			JOptionPane.showMessageDialog(null, "Installed Successfully");
 		}
 	}
 
-	public static void downloadFile(String link, String fileName) 
-	{
+	public static void downloadFile(String link, String fileName) {
 		OutputStream out = null;
 		URLConnection connection = null;
 		InputStream in = null;
@@ -77,28 +58,21 @@ public class ScriptInstaller
 
 			byte[] buffer = new byte[1024];
 			int read;
-			while ((read = in.read(buffer)) != -1) 
-			{
+			while ((read = in.read(buffer)) != -1) {
 				out.write(buffer, 0, read);
 			}
 
-		} catch (Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		} finally 
-		{
-			try 
-			{
-				if (in != null)
-				{
+		} finally {
+			try {
+				if (in != null) {
 					in.close();
 				}
-				if (out != null)
-				{
+				if (out != null) {
 					out.close();
 				}
-			} catch (IOException e) 
-			{
+			} catch (IOException e) {
 
 			}
 		}

@@ -41,10 +41,8 @@ public class MatrixMaker extends JFrame {
 
 	public MatrixMaker(final GUI gu) {
 		this.gui = gu;
-		int row = Integer.parseInt(JOptionPane
-				.showInputDialog("Enter number of rows: "));
-		int col = Integer.parseInt(JOptionPane
-				.showInputDialog("Enter number of columns: "));
+		int row = Integer.parseInt(JOptionPane.showInputDialog("Enter number of rows: "));
+		int col = Integer.parseInt(JOptionPane.showInputDialog("Enter number of columns: "));
 		this.col = col;
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -92,20 +90,16 @@ public class MatrixMaker extends JFrame {
 
 	private Matrix getMatrix(String name) {
 		try {
-			Matrix x = new Matrix(this.table_model.getRowCount(),
-					this.table_model.getColumnCount(), name);
+			Matrix x = new Matrix(this.table_model.getRowCount(), this.table_model.getColumnCount(), name);
 			for (int i = 0; i < this.table_model.getRowCount(); i++) {
 				for (int j = 0; j < this.table_model.getColumnCount(); j++) {
-					x.set(i, j, Integer.parseInt((String) this.table_model
-							.getValueAt(i, j)));
+					x.set(i, j, Integer.parseInt((String) this.table_model.getValueAt(i, j)));
 				}
 			}
 			return x;
 		} catch (NumberFormatException e) {
-			JOptionPane
-					.showMessageDialog(
-							null,
-							"Make sure you have either entered numbers into all boxes and have deselect all boes (hit tab a few times).");
+			JOptionPane.showMessageDialog(null,
+					"Make sure you have either entered numbers into all boxes and have deselect all boes (hit tab a few times).");
 		}
 		return null;
 	}
@@ -171,28 +165,23 @@ class BetterJTable extends JTable {
 	 * the given width.
 	 */
 	private static void paintHeader(Graphics g, JTable table, int x, int width) {
-		TableCellRenderer renderer = table.getTableHeader()
-				.getDefaultRenderer();
-		Component component = renderer.getTableCellRendererComponent(table, "",
-				false, false, -1, 2);
+		TableCellRenderer renderer = table.getTableHeader().getDefaultRenderer();
+		Component component = renderer.getTableCellRendererComponent(table, "", false, false, -1, 2);
 
 		component.setBounds(0, 0, width, table.getTableHeader().getHeight());
 
 		((JComponent) component).setOpaque(false);
-		CELL_RENDER_PANE.paintComponent(g, component, null, x, 0, width, table
-				.getTableHeader().getHeight(), true);
+		CELL_RENDER_PANE.paintComponent(g, component, null, x, 0, width, table.getTableHeader().getHeight(), true);
 	}
 
 	@Override
-	public Component prepareRenderer(TableCellRenderer renderer, int row,
-			int column) {
+	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 		Component component = super.prepareRenderer(renderer, row, column);
 		// if the rendere is a JComponent and the given row isn't part of a
 		// selection, make the renderer non-opaque so that striped rows show
 		// through.
 		if (component instanceof JComponent) {
-			((JComponent) component).setOpaque(getSelectionModel()
-					.isSelectedIndex(row));
+			((JComponent) component).setOpaque(getSelectionModel().isSelectedIndex(row));
 		}
 		return component;
 	}
@@ -220,8 +209,7 @@ class BetterJTable extends JTable {
 			// but for now, it works fine.
 			PropertyChangeListener listener = createTableColumnWidthListener();
 			for (int i = 0; i < fTable.getColumnModel().getColumnCount(); i++) {
-				fTable.getColumnModel().getColumn(i)
-						.addPropertyChangeListener(listener);
+				fTable.getColumnModel().getColumn(i).addPropertyChangeListener(listener);
 			}
 		}
 
@@ -247,8 +235,7 @@ class BetterJTable extends JTable {
 			// get the y coordinate of the first row to paint. if there are no
 			// rows in the table, start painting at the top of the supplied
 			// clipping bounds.
-			int topY = rowAtPoint < 0 ? g.getClipBounds().y : fTable
-					.getCellRect(rowAtPoint, 0, true).y;
+			int topY = rowAtPoint < 0 ? g.getClipBounds().y : fTable.getCellRect(rowAtPoint, 0, true).y;
 
 			// create a counter variable to hold the current row. if there are
 			// no
@@ -257,8 +244,7 @@ class BetterJTable extends JTable {
 			while (topY < g.getClipBounds().y + g.getClipBounds().height) {
 				int bottomY = topY + fTable.getRowHeight();
 				g.setColor(getRowColor(currentRow));
-				g.fillRect(g.getClipBounds().x, topY, g.getClipBounds().width,
-						bottomY);
+				g.fillRect(g.getClipBounds().x, topY, g.getClipBounds().width, bottomY);
 				topY = bottomY;
 				currentRow++;
 			}
@@ -289,8 +275,7 @@ class BetterJTable extends JTable {
 		scrollPane.setViewport(new StripedViewport(table));
 		scrollPane.getViewport().setView(table);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-		scrollPane.setCorner(JScrollPane.UPPER_RIGHT_CORNER,
-				createCornerComponent(table));
+		scrollPane.setCorner(JScrollPane.UPPER_RIGHT_CORNER, createCornerComponent(table));
 		return scrollPane;
 	}
 

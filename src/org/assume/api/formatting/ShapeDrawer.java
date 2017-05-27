@@ -1,7 +1,6 @@
 package org.assume.api.formatting;
 
-public class ShapeDrawer
-{
+public class ShapeDrawer {
 
 	private Shape shape;
 	private char spacingChar;
@@ -10,15 +9,11 @@ public class ShapeDrawer
 	private boolean atMax;
 	private int currentSize;
 
-	public ShapeDrawer(Shape shape, char spacingChar, char drawingChar,
-			int maxSize)
-	{
+	public ShapeDrawer(Shape shape, char spacingChar, char drawingChar, int maxSize) {
 		this(shape, spacingChar, drawingChar, maxSize, false, 1);
 	}
 
-	private ShapeDrawer(Shape shape, char spacingChar, char drawingChar,
-			int maxSize, boolean atMax, int currentSize)
-	{
+	private ShapeDrawer(Shape shape, char spacingChar, char drawingChar, int maxSize, boolean atMax, int currentSize) {
 		this.setShape(shape);
 		this.setSpacingChar(spacingChar);
 		this.setDrawingChar(drawingChar);
@@ -27,106 +22,79 @@ public class ShapeDrawer
 		this.currentSize = currentSize;
 	}
 
-	public void draw()
-	{
-		this.getShape().draw(this.getMaxSize(), this.getSpacingChar(),
-				this.getCurrentSize(), this.getDrawingChar(), this.atMax);
+	public void draw() {
+		this.getShape().draw(this.getMaxSize(), this.getSpacingChar(), this.getCurrentSize(), this.getDrawingChar(),
+				this.atMax);
 	}
 
-	public int getCurrentSize()
-	{
+	public int getCurrentSize() {
 		return currentSize;
 	}
 
-	public void setCurrentSize(int currentSize)
-	{
+	public void setCurrentSize(int currentSize) {
 		this.currentSize = currentSize;
 	}
 
-	public char getDrawingChar()
-	{
+	public char getDrawingChar() {
 		return drawingChar;
 	}
 
-	public void setDrawingChar(char drawingChar)
-	{
+	public void setDrawingChar(char drawingChar) {
 		this.drawingChar = drawingChar;
 	}
 
-	public char getSpacingChar()
-	{
+	public char getSpacingChar() {
 		return spacingChar;
 	}
 
-	public void setSpacingChar(char spacingChar)
-	{
+	public void setSpacingChar(char spacingChar) {
 		this.spacingChar = spacingChar;
 	}
 
-	public int getMaxSize()
-	{
+	public int getMaxSize() {
 		return maxSize;
 	}
 
-	public void setMaxSize(int maxSize)
-	{
+	public void setMaxSize(int maxSize) {
 		this.maxSize = maxSize;
 	}
 
-	public Shape getShape()
-	{
+	public Shape getShape() {
 		return shape;
 	}
 
-	public void setShape(Shape shape)
-	{
+	public void setShape(Shape shape) {
 		this.shape = shape;
 	}
 
-	enum Shape
-	{
-		STAR
-		{
+	enum Shape {
+		STAR {
 			@Override
-			void draw(int max, char spacing, int x, char drawing, boolean atMax)
-			{
+			void draw(int max, char spacing, int x, char drawing, boolean atMax) {
 			}
 		},
-		DIAMOND
-		{
+		DIAMOND {
 			@Override
-			void draw(int max, char spacing, int x, char drawing, boolean atMax)
-			{
+			void draw(int max, char spacing, int x, char drawing, boolean atMax) {
 
-				if (x < 1)
-				{
+				if (x < 1) {
 					return;
-				}
-				else if (x > max && !atMax)
-				{
+				} else if (x > max && !atMax) {
 					draw(max, spacing, x - 4, drawing, !atMax);
-				}
-				else
-				{
-					for (int r = 0; r < (Math.ceil((max - x) / 2)); r++)
-					{
+				} else {
+					for (int r = 0; r < (Math.ceil((max - x) / 2)); r++) {
 						System.out.print(spacing);
 					}
-					for (int i = 0; i < x; i++)
-					{
+					for (int i = 0; i < x; i++) {
 						System.out.print(drawing);
 					}
-					for (int r = 0; r < (Math.ceil((max - x) / 2)); r++)
-					{
+					for (int r = 0; r < (Math.ceil((max - x) / 2)); r++) {
 						System.out.print(spacing);
 					}
 					System.out.println();
-					if (atMax)
-					{
+					if (atMax) {
 						draw(max, spacing, x - 2, drawing, atMax);
-					}
-					else
-					{
+					} else {
 						draw(max, spacing, x + 2, drawing, atMax);
 					}
 				}
@@ -136,8 +104,7 @@ public class ShapeDrawer
 		abstract void draw(int max, char u, int x, char c, boolean t);
 	}
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		new ShapeDrawer(Shape.DIAMOND, ' ', '*', 7).draw();
 	}
 

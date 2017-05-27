@@ -1,6 +1,5 @@
 package org.assume.ScriptInformation.Server.handlers;
 
-
 import java.io.ObjectInputStream;
 import java.net.Socket;
 
@@ -9,28 +8,24 @@ import org.assume.ScriptInformation.GUI.handlers.GUIHandler;
 
 import scripts.ScriptStatus;
 
-
-public class ClientHandler implements Runnable{
+public class ClientHandler implements Runnable {
 
 	private Socket listener;
 	private final GUIHandler handler = new GUIHandler();
 	private final Database database = new Database();
+
 	public ClientHandler(Socket listener) {
 		this.listener = listener;
 	}
 
 	@Override
 	public void run() {
-		if(!listener.isClosed())
-		{
+		if (!listener.isClosed()) {
 			try {
-				ObjectInputStream inStream = new ObjectInputStream(
-						listener.getInputStream());
+				ObjectInputStream inStream = new ObjectInputStream(listener.getInputStream());
 				try {
-					ScriptStatus script = (ScriptStatus) inStream
-							.readObject();
-					if(script != null)
-					{
+					ScriptStatus script = (ScriptStatus) inStream.readObject();
+					if (script != null) {
 						database.update(script.getUsername(), script);
 						handler.updateScriptList(Database.map, script.getUsername());
 					}
@@ -38,8 +33,7 @@ public class ClientHandler implements Runnable{
 					ex.printStackTrace();
 				}
 				inStream.close();
-			}catch(Exception e)
-			{
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
