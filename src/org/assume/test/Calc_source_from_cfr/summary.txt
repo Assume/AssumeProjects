@@ -1,2 +1,0 @@
-Summary for /www/javadecompilers/app/public/data/29.05.17/723691be428e1c451128714053cdf005/Calc.jar
-Decompiled with CFR 0_118

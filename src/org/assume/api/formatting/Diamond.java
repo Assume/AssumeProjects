@@ -1,4 +1,4 @@
-package org.assume.api.fun;
+package org.assume.api.formatting;
 
 public class Diamond {
 	public static void main(String[] args) {
